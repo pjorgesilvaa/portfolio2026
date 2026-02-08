@@ -119,7 +119,7 @@ export default function Home() {
               <ProjectCard
                 title="Portfolio 2026"
                 description="A more ambitious evolution of my personal website, featuring a blog where I share thoughts on life as a developer in Portugal. Heavily inspired by designers I admire, with a stronger focus on visual identity and content."
-                url=""
+                url="https://www.psilvaa.com/"
                 image="/portfolio2026.png"
                 imageAlt="Portfolio 2026"
                 techs={['Next.js', 'Tailwind CSS', 'shadcn/ui']}
@@ -127,7 +127,7 @@ export default function Home() {
               <ProjectCard
                 title="Portfolio 2025"
                 description="A simple, straightforward personal portfolio built with the goal of creating something I’d be proud to share. Focused on reliability, clarity, and responsive design, ensuring the site worked smoothly across all devices."
-                url="https://github.com/pjorgesilvaa/portfolio"
+                url="https://www.v1.psilvaa.com/"
                 image="/portfolio2025.png"
                 imageAlt="Portfolio 2025"
                 techs={['Next.js', 'Tailwind CSS', 'shadcn/ui']}
