@@ -20,7 +20,7 @@ export function ProjectCard({ title, url, description, image, imageAlt, techs }:
         <span className="text-foreground text-lg leading-4 font-bold">{title}</span>
         <OpenNewTabIcon className="w-3 h-3 fill-foreground" />
       </Link>
-      <Image src={image} alt={imageAlt} width={800} height={400} className="rounded mt-2 mb-2" />
+      <Image src={image} alt={imageAlt} width={800} height={400} className="rounded mt-2 mb-2 border-primary border" />
       <TypographyP className="not-first:mt-0 text-sm leading-4">{description}</TypographyP>
       <div className="flex flex-wrap gap-2">
         {techs.map(tech => (
