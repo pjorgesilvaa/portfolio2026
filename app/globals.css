@@ -2,20 +2,20 @@
 @import 'tw-animate-css';
 
 :root {
-  --primary: rgb(255, 255, 255, 0.1);
+  --primary: #23677a;
   --radius: 0.625rem;
-  --background: #0B0F1A ;
+  --background: #F7FAFC;
   --foreground: #E6EBF5;
-  --card: #151B2B;
+  --card: #0f131f;
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
+  --secondary: #3F555D;
   --secondary-foreground: #AEB4C2;
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --accent: #CEE6F0;
   --accent-foreground: #3B82F6;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -79,7 +79,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;

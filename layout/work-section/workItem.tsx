@@ -1,0 +1,33 @@
+import { Badge } from "@/components/ui/badge";
+
+export default function WorkItem({
+  item,
+  isCurrent,
+}: {
+  item: { title: string; company: string; place: string; period: string; description: string };
+  isCurrent: boolean;
+}) {
+  return (
+    <div className="flex items-stretch justify-center gap-4 mb-8">
+      {/* LEFT SIDE */}
+      <div className="flex flex-col items-center self-stretch">
+        <div className={`w-2.5 h-2.5 rounded-full ${isCurrent ? 'bg-primary' : 'bg-accent'}`} />
+        <div className="w-0.5 bg-accent mt-2 flex-1" />
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="pb-6">
+        <div className="flex justify-between items-center">
+          <h3 className="text-[#2B3437] text-2xl font-bold">{item.title}</h3>
+          <Badge className={`font-bold px-4 py-1.5 ${isCurrent ? 'bg-primary text-white' : 'bg-accent text-[#2B3437]'}`}>
+            {item.period}
+          </Badge>
+        </div>
+        <p className="text-[#2B3437] font-semibold">
+          {item.company} • {item.place}
+        </p>
+        <p className="text-secondary mt-2">{item.description}</p>
+      </div>
+    </div>
+  );
+}
