@@ -17,20 +17,20 @@ export default function ProjectSection() {
       bannerUrl: null,
     },
     {
-      id: 'blank-project',
-      title: 'No project yet.',
+      id: 'portfolio-2026',
+      title: 'Portfolio 2026',
       description:
-        'This section will be updated soon with selected projects that showcase my expertise and impact in the industry. Stay tuned for exciting updates on my work and contributions to various projects.',
-      tags: ['Coming Soon', 'Stay Tuned', 'Exciting Updates'],
-      bannerUrl: null,
+        'A more ambitious evolution of my personal website, featuring a project section where I share my accomplishments on life as a developer in Portugal. Heavily inspired by designers I admire, with a stronger focus on visual identity and content.',
+      tags: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+      bannerUrl: 'images/portfolio-2026.png',
     },
     {
-      id: 'blank-project',
-      title: 'No project yet.',
+      id: 'portfolio-2025',
+      title: 'Portfolio 2025',
       description:
-        'This section will be updated soon with selected projects that showcase my expertise and impact in the industry. Stay tuned for exciting updates on my work and contributions to various projects.',
-      tags: ['Coming Soon', 'Stay Tuned', 'Exciting Updates'],
-      bannerUrl: null,
+        'A simple, straightforward personal portfolio built with the goal of creating something I’d be proud to share. Focused on reliability, clarity, and responsive design, ensuring the site worked smoothly across all devices.',
+      tags: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],
+      bannerUrl: 'images/portfolio-2025.png',
     },
   ];
 
@@ -38,7 +38,9 @@ export default function ProjectSection() {
     <div className="w-full md:w-7xl m-auto flex flex-col items-start gap-8 md:gap-16 md:px-8">
       <div className="w-full flex flex-col md:flex-row justify-between items-start">
         <h2 className="text-primary font-semibold uppercase">Selected Projects</h2>
-        <h3 className="md:w-1/3 text-sm md:text-lg text-secondary md:text-right">Always focusing on structured, scalable solutions and user experience.</h3>
+        <h3 className="md:w-1/3 text-sm md:text-lg text-secondary md:text-right">
+          Built with scalability, performance, and production reliability in mind.
+        </h3>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {projectItems.map((item, index) => {

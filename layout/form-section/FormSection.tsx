@@ -1,6 +1,24 @@
-import { Mail, MapPin } from "lucide-react";
+'use client';
+
+import { Mail, MapPin } from 'lucide-react';
+import Link from 'next/link';
+import { sendEmail } from '@/app/actions/sendEmail';
+import { useRef, useState } from 'react';
 
 export default function FormSection() {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const isFormValid = formState.name.trim() && formState.email.trim() && formState.message.trim();
+
   return (
     <div className="w-full md:max-w-7xl mx-auto md:px-8">
       <div className="bg-primary p-12 md:p-20 rounded-xl overflow-hidden relative">
@@ -9,60 +27,159 @@ export default function FormSection() {
             <path d="M0 0 L100 0 L100 100 Z" fill="white"></path>
           </svg>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 relative z-10">
+          {/* LEFT SIDE */}
           <div>
-            <h2 className="font-headline text-2xl md:text-5xl font-bold text-on-primary leading-tight">Let's build something remarkable</h2>
+            <h2 className="font-headline text-2xl md:text-5xl font-bold text-on-primary leading-tight">
+              Let’s build something that scales
+            </h2>
+
             <p className="text-on-primary opacity-80 text-sm md:text-lg md:mt-4 mt-8">
-              Whether you have a clear vision or need help defining one, I'm here to help architect your digital future.
+              From idea to production, I help design and build scalable, high-performance systems.
             </p>
+
             <div className="mt-6 md:mt-12">
               <div className="flex items-center gap-4 text-on-primary">
-                <div className="flex items-center justify-center">
-                  <Mail />
-                </div>
-                <span className="font-medium text-sm md:text-base">paulo@architect.digital</span>
+                <Mail className="min-w-6 min-h-6" />
+                <Link href="mailto:pjorge.silvaa@gmail.com" className="font-medium text-sm md:text-base hover:underline">
+                  pjorge.silvaa@gmail.com
+                </Link>
               </div>
+
               <div className="flex items-center gap-4 text-on-primary mt-2 md:mt-6">
-                <div className="flex items-center justify-center">
-                  <MapPin />
-                </div>
-                <span className="font-medium text-sm md:text-base">Lisbon, PT / Remote Worldwide</span>
+                <MapPin className="min-w-6 min-h-6" />
+                <span className="font-medium text-sm md:text-base">Porto, Portugal • Luxembourg • Remote</span>
               </div>
             </div>
           </div>
-          <div className="hidden md:block bg-white p-4 md:p-10 rounded-xl">
-            <form action="#" className="space-y-6">
+
+          {/* FORM */}
+          <div className="hidden md:block bg-white p-4 md:p-10 rounded-xl relative overflow-hidden">
+            {/* SUCCESS OVERLAY */}
+            {status === 'success' && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-10 animate-fadeIn">
+                <div className="text-center">
+                  <div className="text-4xl mb-2 animate-bounce">🚀</div>
+                  <p className="font-bold text-[#2B3437]">Message sent!</p>
+                  <p className="text-sm text-[#2B3437]">I'll get back to you soon</p>
+                </div>
+              </div>
+            )}
+
+            <form
+              ref={formRef}
+              action={async formData => {
+                setLoading(true);
+                setStatus('idle');
+
+                const trap = formData.get('company'); // honeypot
+                if (trap) {
+                  setLoading(false);
+                  return;
+                }
+
+                try {
+                  const res = await sendEmail(formData);
+
+                  if (res?.success !== false) {
+                    setStatus('success');
+
+                    formRef.current?.reset();
+
+                    setFormState({
+                      name: '',
+                      email: '',
+                      message: '',
+                    });
+
+                    setTimeout(() => setStatus('idle'), 2500);
+                  } else {
+                    setStatus('error');
+                  }
+                } catch {
+                  setStatus('error');
+                }
+
+                setLoading(false);
+              }}
+              className="space-y-6"
+            >
+              {/* 🛡️ HONEYPOT */}
+              <input type="text" name="company" className="hidden" tabIndex={-1} autoComplete="off" />
+
+              {/* NAME */}
               <div>
-                <label className="block text-sm font-semibold text-secondary mb-2">Full Name</label>
+                <label className="block text-sm font-semibold text-secondary mb-2">Name</label>
                 <input
-                  className="w-full bg-gray-200 text-[#2B3437] border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-gray-100 transition-all outline-none"
+                  name="name"
+                  value={formState.name}
+                  onChange={e => setFormState(s => ({ ...s, name: e.target.value }))}
+                  className="w-full bg-gray-200 text-[#2B3437] rounded-lg p-4 outline-none focus:ring-2 focus:ring-primary"
                   placeholder="John Doe"
                   type="text"
+                  required
                 />
               </div>
+
+              {/* EMAIL */}
               <div>
-                <label className="block text-sm font-semibold text-secondary mb-2">Email Address</label>
+                <label className="block text-sm font-semibold text-secondary mb-2">Email</label>
                 <input
-                  className="w-full bg-gray-200 text-[#2B3437] border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-gray-100 transition-all outline-none"
+                  name="email"
+                  value={formState.email}
+                  onChange={e => setFormState(s => ({ ...s, email: e.target.value }))}
+                  className="w-full bg-gray-200 text-[#2B3437] rounded-lg p-4 outline-none focus:ring-2 focus:ring-primary"
                   placeholder="john@example.com"
                   type="email"
+                  required
                 />
               </div>
+
+              {/* MESSAGE */}
               <div>
-                <label className="block text-sm font-semibold text-secondary mb-2">Your Vision</label>
+                <label className="block text-sm font-semibold text-secondary mb-2">Proposal Overview</label>
                 <textarea
-                  className="w-full bg-gray-200 text-[#2B3437] border-none rounded-lg p-4 focus:ring-2 focus:ring-primary focus:bg-gray-100 transition-all outline-none"
-                  placeholder="Describe your project..."
+                  name="message"
+                  value={formState.message}
+                  onChange={e => setFormState(s => ({ ...s, message: e.target.value }))}
+                  className="w-full bg-gray-200 text-[#2B3437] rounded-lg p-4 outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Describe your proposal..."
                   rows={4}
+                  required
                 />
               </div>
+
+              {/* BUTTON */}
               <button
-                className="w-full bg-primary text-on-primary py-4 rounded-lg font-bold hover:bg-primary-dim transition-all shadow-lg active:scale-95"
                 type="submit"
+                disabled={loading || !isFormValid}
+                className="w-full bg-primary text-on-primary py-4 rounded-lg font-bold transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                Send Message
+                {loading ? 'Sending...' : 'Send Message'}
               </button>
+
+              {/* ERROR */}
+              {status === 'error' && <p className="text-red-600 text-sm">Something went wrong. Please try again later.</p>}
             </form>
+
+            {/* ANIMATION */}
+            <style jsx>{`
+              .animate-fadeIn {
+                animation: fadeIn 0.25s ease-out forwards;
+              }
+
+              @keyframes fadeIn {
+                from {
+                  opacity: 0;
+                  transform: scale(0.98);
+                }
+                to {
+                  opacity: 1;
+                  transform: scale(1);
+                }
+              }
+            `}</style>
           </div>
         </div>
       </div>

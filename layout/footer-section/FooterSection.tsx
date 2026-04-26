@@ -7,10 +7,10 @@ export default function FooterSection() {
       <div></div>
       <p className="text-secondary text-sm">© 2026 Paulo Silva. All rights reserved.</p>
       <div className="flex justify-between items-center gap-8">
-        <Link href="" target="_blank" rel="noopener noreferrer">
+        <Link href="https://www.linkedin.com/in/paulo-silva171" target="_blank" rel="noopener noreferrer">
           <LinkedinIcon color="#23677a" />
         </Link>
-        <Link href="" target="_blank" rel="noopener noreferrer">
+        <Link href="https://github.com/pjorgesilvaa" target="_blank" rel="noopener noreferrer">
           <GithubIcon color="#23677a" />
         </Link>
       </div>

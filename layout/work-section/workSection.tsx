@@ -7,40 +7,63 @@ export default function WorkSection() {
       company: 'Sonae — SC Fitness',
       place: 'Maia, PT',
       period: '2026 — Present',
-      description:
-        'Owning the development and evolution of SC Fitness’ digital ecosystem, including two mobile applications used daily by over 150k users, as well as two public websites and their shared backend systems. Responsible for architecture decisions, feature delivery, and ensuring performance, scalability, and reliability across web and mobile platforms.',
+      description: (
+        <>
+          Leading the development and evolution of SC Fitness’ digital ecosystem, including two mobile applications serving 150k+ users,
+          alongside public websites and shared backend systems. Responsible for architecture, feature delivery, and ensuring performance,
+          scalability, and reliability across all platforms.
+        </>
+      ),
     },
     {
       title: 'Tech Lead',
       company: 'Axians',
       place: 'Lisboa, PT',
       period: '2025 — 2026',
-      description:
-        "Lead the development of a large scale platform for the Portuguese Ministry of Justice, designed microservices based API's and managed complex CI/CD pipelines. Acted as the main technical contact with stakeholders while guiding the team on architecture, delivery, and best practices.",
+      description: (
+        <>
+          Led development of a large-scale platform for the Portuguese Ministry of Justice. Designed microservices-based APIs, managed
+          complex CI/CD pipelines, and acted as the main technical point of contact for stakeholders. Guided the team on architecture,
+          delivery, and engineering best practices.
+        </>
+      ),
     },
     {
       title: 'Full Stack Developer',
       company: 'Noesis',
       place: 'Matosinhos, PT',
       period: '2023 — 2025',
-      description:
-        "Developed and maintained multiple full stack applications across different clients, contributing to both frontend and backend architecture. Mentored junior developers, helped standardize development practices, and led the delivery of a full stack portal for the Autoridade da Concorrência.",
+      description: (
+        <>
+          Developed and maintained multiple full stack applications across various clients, contributing to both frontend and backend
+          architecture. Mentored junior developers, improved development standards, and led delivery of a full stack portal for the{' '}
+          <i>Autoridade da Concorrência</i>.
+        </>
+      ),
     },
     {
       title: 'Junior Full Stack Developer',
       company: 'Noesis',
       place: 'Matosinhos, PT',
       period: '2021 — 2023',
-      description:
-        "Contributed to several React and .NET solutions, working closely with senior engineers to build and maintain production systems. Took initiative in improving internal tooling by leading the development of an issue-tracking solution that significantly increased team efficiency and revenue.",
+      description: (
+        <>
+          Contributed to several React and .NET applications, collaborating with senior engineers to build and maintain production systems.
+          Led development of an internal issue-tracking tool that significantly improved team efficiency and revenue.
+        </>
+      ),
     },
     {
       title: 'Frontend Developer Intern',
       company: 'GECAD',
       place: 'Porto, PT',
       period: '2021 — 2021',
-      description:
-        "Developed a smart building management portal using Vue.js, enabling real-time device monitoring and control. Worked directly with clients in an agile environment and implemented real-time alert systems using MQTT for environmental monitoring.",
+      description: (
+        <>
+          Developed a smart building management portal using Vue.js, enabling real-time device monitoring and control. Implemented alert
+          systems using MQTT and worked directly with clients in an agile environment.
+        </>
+      ),
     },
   ];
 
@@ -50,7 +73,9 @@ export default function WorkSection() {
         <div className="w-full md:w-6xl">
           <h2 className="text-primary font-semibold uppercase">Professional Journey</h2>
           <h1 className="text-[#2B3437] text-2xl md:text-4xl font-bold">Expertise forged in the industry.</h1>
-          <p className="text-secondary text-sm md:text-base mt-4">Over 8 years of experience working with global brands to define their digital presence.</p>
+          <p className="text-secondary text-sm md:text-base mt-4">
+            Over 5 years of experience, from junior to tech lead, delivering production-grade systems across web and cloud.
+          </p>
         </div>
         <div>
           {workItems.map((item, index) => (
