@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className='scroll-smooth'>
+    <html lang="en" className='scroll-smooth scroll-pt-21'>
       <GoogleAnalytics gaId="G-ZYPKYJVTQQ" />
       <GoogleTagManager gtmId="GTM-NSX6S6VJ" />
       <body className={`${inter.variable} antialiased`}>{children}</body>

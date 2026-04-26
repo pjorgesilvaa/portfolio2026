@@ -46,11 +46,11 @@ export default function WorkSection() {
 
   return (
     <>
-      <div className="w-7xl m-auto flex items-baseline justify-between gap-16 px-8">
-        <div className="w-6xl">
+      <div className="w-full md:w-7xl m-auto flex flex-col md:flex-row items-baseline justify-between gap-8 md:gap-16 md:px-8">
+        <div className="w-full md:w-6xl">
           <h2 className="text-primary font-semibold uppercase">Professional Journey</h2>
-          <h1 className="text-[#2B3437] text-4xl font-bold">Expertise forged in the industry.</h1>
-          <p className="text-secondary mt-4">Over 8 years of experience working with global brands to define their digital presence.</p>
+          <h1 className="text-[#2B3437] text-2xl md:text-4xl font-bold">Expertise forged in the industry.</h1>
+          <p className="text-secondary text-sm md:text-base mt-4">Over 8 years of experience working with global brands to define their digital presence.</p>
         </div>
         <div>
           {workItems.map((item, index) => (

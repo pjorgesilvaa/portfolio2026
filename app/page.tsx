@@ -10,22 +10,22 @@ export default function Home() {
   return (
     <>
       <Header />
-      <section className="min-h-[calc(100vh-84px)] px-8 py-16 drop-shadow-xs flex items-center justify-center" id="home">
+      <section className="min-h-[calc(100vh-84px)] px-8 py-8 md:py-16 drop-shadow-xs flex items-center justify-center" id="home">
         <HeroSection />
       </section>
-      <section className="bg-[#EFF4F7] min-h-screen px-8 py-16 drop-shadow-xs flex items-center justify-center" id="projects">
+      <section className="bg-[#EFF4F7] min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="projects">
         <ProjectSection />
       </section>
-      <section className="min-h-screen px-8 py-16 drop-shadow-xs flex items-center justify-center" id="work">
+      <section className="min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="work">
         <WorkSection />
       </section>
-      <section className="bg-[#EFF4F7] min-h-screen px-8 py-16 drop-shadow-xs flex items-center justify-center" id="feedback">
+      <section className="bg-[#EFF4F7] min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="feedback">
         <FeedbackSection />
       </section>
-      <section className="min-h-screen px-8 py-16 drop-shadow-xs flex items-center justify-center" id="form">
+      <section className="min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="form">
         <FormSection />
       </section>
-      <section className="bg-[#EFF4F7] px-16 py-16 drop-shadow-xs flex items-center justify-center">
+      <section className="bg-[#EFF4F7] px-8 py-8 drop-shadow-xs flex items-center justify-center">
         <FooterSection />
       </section>
     </>

@@ -35,17 +35,17 @@ export default function ProjectSection() {
   ];
 
   return (
-    <div className="w-7xl m-auto flex flex-col items-start gap-16 px-8">
-      <div className="w-full flex justify-between items-start">
+    <div className="w-full md:w-7xl m-auto flex flex-col items-start gap-8 md:gap-16 md:px-8">
+      <div className="w-full flex flex-col md:flex-row justify-between items-start">
         <h2 className="text-primary font-semibold uppercase">Selected Projects</h2>
-        <h3 className="w-1/3 text-lg text-secondary text-right">Always focusing on structured, scalable solutions and user experience.</h3>
+        <h3 className="md:w-1/3 text-sm md:text-lg text-secondary md:text-right">Always focusing on structured, scalable solutions and user experience.</h3>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {projectItems.map((item, index) => {
-          const spanClass = index === 0 ? 'col-span-2' : index === 1 ? 'col-span-1' : index === 2 ? 'col-span-1' : 'col-span-2';
+          const spanClass = index === 0 ? 'md:col-span-2' : index === 1 ? 'md:col-span-1' : index === 2 ? 'md:col-span-1' : 'md:col-span-2';
 
           return (
-            <div key={index} className={`${spanClass} bg-white rounded-lg shadow-md overflow-hidden flex flex-col`}>
+            <div key={index} className={`col-span-1 ${spanClass} bg-white rounded-lg shadow-md overflow-hidden flex flex-col`}>
               {item.bannerUrl ? (
                 <img src={item.bannerUrl} alt={item.title} className="w-full h-48 object-cover" />
               ) : (
@@ -57,7 +57,7 @@ export default function ProjectSection() {
               <div className="p-4 flex flex-col gap-4 flex-1">
                 <h3 className="text-[#2B3437] text-xl font-bold">{item.title}</h3>
 
-                <p className="text-secondary">{item.description}</p>
+                <p className="text-secondary text-sm md:text-base">{item.description}</p>
 
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {item.tags.map((tag, index) => (
