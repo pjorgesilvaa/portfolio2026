@@ -89,3 +89,40 @@
     cursor: pointer;
   }
 }
+
+@keyframes fade-up-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(35, 103, 122, 0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(35, 103, 122, 0); }
+}
+
+.hero-animate {
+  animation: fade-up-in 0.7s ease-out both;
+}
+
+.float-animate {
+  animation: float 5s ease-in-out infinite;
+}
+
+.hero-fade-in {
+  animation: fade-up-in 0.8s ease-out both;
+}
+
+.dot-pulse-animate {
+  animation: dot-pulse 2.5s ease-in-out infinite;
+}

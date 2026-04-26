@@ -1,3 +1,4 @@
+import AnimateIn from '@/components/animateIn';
 import WorkItem from './workItem';
 
 export default function WorkSection() {
@@ -9,7 +10,7 @@ export default function WorkSection() {
       period: '2026 — Present',
       description: (
         <>
-          Leading the development and evolution of SC Fitness’ digital ecosystem, including two mobile applications serving 150k+ users,
+          Leading the development and evolution of SC Fitness' digital ecosystem, including two mobile applications serving 150k+ users,
           alongside public websites and shared backend systems. Responsible for architecture, feature delivery, and ensuring performance,
           scalability, and reliability across all platforms.
         </>
@@ -70,16 +71,19 @@ export default function WorkSection() {
   return (
     <>
       <div className="w-full md:w-7xl m-auto flex flex-col md:flex-row items-baseline justify-between gap-8 md:gap-16 md:px-8">
-        <div className="w-full md:w-6xl">
+        <AnimateIn className="w-full md:w-6xl" animation="fade-left">
           <h2 className="text-primary font-semibold uppercase">Professional Journey</h2>
           <h1 className="text-[#2B3437] text-2xl md:text-4xl font-bold">Expertise forged in the industry.</h1>
           <p className="text-secondary text-sm md:text-base mt-4">
             Over 5 years of experience, from junior to tech lead, delivering production-grade systems across web and cloud.
           </p>
-        </div>
+        </AnimateIn>
+
         <div>
           {workItems.map((item, index) => (
-            <WorkItem key={index} item={item} isCurrent={index === 0} />
+            <AnimateIn key={index} animation="fade-right" delay={index * 100}>
+              <WorkItem item={item} isCurrent={index === 0} />
+            </AnimateIn>
           ))}
         </div>
       </div>

@@ -4,6 +4,7 @@ import { Mail, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { sendEmail } from '@/app/actions/sendEmail';
 import { useRef, useState } from 'react';
+import AnimateIn from '@/components/animateIn';
 
 export default function FormSection() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -20,7 +21,7 @@ export default function FormSection() {
   const isFormValid = formState.name.trim() && formState.email.trim() && formState.message.trim();
 
   return (
-    <div className="w-full md:max-w-7xl mx-auto md:px-8">
+    <AnimateIn className="w-full md:max-w-7xl mx-auto md:px-8" animation="fade-up">
       <div className="bg-primary p-12 md:p-20 rounded-xl overflow-hidden relative">
         <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
           <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -30,7 +31,7 @@ export default function FormSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20 relative z-10">
           {/* LEFT SIDE */}
-          <div>
+          <AnimateIn animation="fade-left" delay={150}>
             <h2 className="font-headline text-2xl md:text-5xl font-bold text-on-primary leading-tight">
               Let’s build something that scales
             </h2>
@@ -52,10 +53,11 @@ export default function FormSection() {
                 <span className="font-medium text-sm md:text-base">Porto, Portugal • Luxembourg • Remote</span>
               </div>
             </div>
-          </div>
+          </AnimateIn>
 
           {/* FORM */}
-          <div className="hidden md:block bg-white p-4 md:p-10 rounded-xl relative overflow-hidden">
+          <AnimateIn animation="fade-right" delay={250} className="hidden md:block">
+          <div className="bg-white p-4 md:p-10 rounded-xl relative overflow-hidden">
             {/* SUCCESS OVERLAY */}
             {status === 'success' && (
               <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-10 animate-fadeIn">
@@ -154,7 +156,7 @@ export default function FormSection() {
               <button
                 type="submit"
                 disabled={loading || !isFormValid}
-                className="w-full bg-primary text-on-primary py-4 rounded-lg font-bold transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full bg-primary text-on-primary py-4 rounded-lg font-bold transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {loading ? 'Sending...' : 'Send Message'}
               </button>
@@ -181,8 +183,9 @@ export default function FormSection() {
               }
             `}</style>
           </div>
+          </AnimateIn>
         </div>
       </div>
-    </div>
+    </AnimateIn>
   );
 }
