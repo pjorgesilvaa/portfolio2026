@@ -95,7 +95,7 @@ export default function FormSection() {
                       message: '',
                     });
 
-                    setTimeout(() => setStatus('idle'), 2500);
+                    /* setTimeout(() => setStatus('idle'), 5000); */
                   } else {
                     setStatus('error');
                   }

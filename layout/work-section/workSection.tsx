@@ -1,5 +1,6 @@
 import AnimateIn from '@/components/animateIn';
 import WorkItem from './workItem';
+import WorkResumeDownloadButton from './workResumeDownloadButton';
 
 export default function WorkSection() {
   const workItems = [
@@ -77,6 +78,7 @@ export default function WorkSection() {
           <p className="text-secondary text-sm md:text-base mt-4">
             Over 5 years of experience, from junior to tech lead, delivering production-grade systems across web and cloud.
           </p>
+          <WorkResumeDownloadButton />
         </AnimateIn>
 
         <div>

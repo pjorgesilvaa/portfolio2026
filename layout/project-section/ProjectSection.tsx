@@ -50,12 +50,7 @@ export default function ProjectSection() {
           const spanClass = index === 0 ? 'md:col-span-2' : index === 1 ? 'md:col-span-1' : index === 2 ? 'md:col-span-1' : 'md:col-span-2';
 
           return (
-            <AnimateIn
-              key={index}
-              className={`col-span-1 ${spanClass}`}
-              animation="fade-up"
-              delay={index * 80}
-            >
+            <AnimateIn key={index} className={`col-span-1 ${spanClass}`} animation="fade-up" delay={index * 80}>
               <div className="group bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-default">
                 {item.bannerUrl ? (
                   <div className="overflow-hidden">
