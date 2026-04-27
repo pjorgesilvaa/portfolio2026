@@ -64,8 +64,6 @@ export async function getPublishedArticles(limit = 3): Promise<BlogPost[]> {
     return [];
   }
 
-  console.log('[getPublishedArticles] Raw data from Supabase:', data);
-
   return (data ?? []).map(row => {
     const author = Array.isArray(row.authors) ? row.authors[0] : row.authors;
     const category = Array.isArray(row.categories) ? row.categories[0] : row.categories;
