@@ -1,3 +1,4 @@
+import BlogSection from '@/layout/blog-section/BlogSection';
 import FeedbackSection from '@/layout/feedback-section/FeedbackSection';
 import FooterSection from '@/layout/footer-section/FooterSection';
 import FormSection from '@/layout/form-section/FormSection';
@@ -22,8 +23,11 @@ export default function Home() {
       <section className="bg-[#EFF4F7] min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="feedback">
         <FeedbackSection />
       </section>
-      <section className="min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="form">
+      <section className="md:min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="form">
         <FormSection />
+      </section>
+      <section className="bg-[#EFF4F7] min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="feedback">
+        <BlogSection />
       </section>
       <section className="bg-[#EFF4F7] px-8 py-8 drop-shadow-xs flex items-center justify-center">
         <FooterSection />
