@@ -1,5 +1,6 @@
 import ProjectListingClient from '@/layout/project-listing/ProjectListingClient';
 import { PROJECTS_PER_PAGE, getProjectsWithFilters } from '@/lib/supabase/queries/projects';
+import { getLanguage } from '@/lib/language.server';
 
 interface Props {
   searchParams: Promise<{
@@ -12,11 +13,12 @@ interface Props {
 export default async function ProjectsPage({ searchParams }: Props) {
   const params = await searchParams;
 
-  const page   = Math.max(1, Number(params.page ?? 1));
-  const search = params.search ?? '';
-  const sort   = params.sort ?? 'newest';
+  const page     = Math.max(1, Number(params.page ?? 1));
+  const search   = params.search ?? '';
+  const sort     = params.sort ?? 'newest';
+  const language = await getLanguage();
 
-  const { projects, total } = await getProjectsWithFilters({ page, search, sort });
+  const { projects, total } = await getProjectsWithFilters({ page, search, sort, language });
   const totalPages = Math.ceil(total / PROJECTS_PER_PAGE);
 
   return (

@@ -11,6 +11,7 @@ export default interface Project {
   bannerUrl: string;
   projectGitUrl: string | null;
   projectDeployedUrl: string | null;
+  language: string;
   createdAt: Date;
   updatedAt: Date;
 }

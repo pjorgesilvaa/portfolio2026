@@ -1,4 +1,5 @@
 import { getProjectBySlug } from '@/lib/supabase/queries/projects';
+import { getLanguage } from '@/lib/language.server';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
@@ -9,7 +10,8 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  const language = await getLanguage();
+  const project = await getProjectBySlug(slug, language);
   if (!project) return {};
   return {
     title: `${project.title} | Paulo Silva`,
@@ -19,7 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  const language = await getLanguage();
+  const project = await getProjectBySlug(slug, language);
 
   if (!project) notFound();
 

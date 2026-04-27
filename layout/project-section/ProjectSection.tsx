@@ -1,5 +1,6 @@
 import AnimateIn from '@/components/animateIn';
 import { getProjectsBySlots } from '@/lib/supabase/queries/projects';
+import { getLanguage } from '@/lib/language.server';
 import Link from 'next/link';
 
 // ── Define exactly which projects appear and in which slot ──────────────────
@@ -12,7 +13,8 @@ const FEATURED_SLOTS: (string | null)[] = [
 // ────────────────────────────────────────────────────────────────────────────
 
 export default async function ProjectSection() {
-  const projects = await getProjectsBySlots(FEATURED_SLOTS);
+  const language = await getLanguage();
+  const projects = await getProjectsBySlots(FEATURED_SLOTS, language);
 
   // Col-span pattern: 2-1-1-2-2-1-1-2...
   const spanClass = (index: number) =>

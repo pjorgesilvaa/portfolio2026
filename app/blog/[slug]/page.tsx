@@ -1,4 +1,5 @@
 import { getArticleBySlug } from '@/lib/supabase/queries/articles';
+import { getLanguage } from '@/lib/language.server';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
@@ -9,7 +10,8 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getArticleBySlug(slug);
+  const language = await getLanguage();
+  const post = await getArticleBySlug(slug, language);
   if (!post) return {};
   return {
     title: `${post.metaTitle} | Paulo Silva` || `${post.title} | Paulo Silva`,
@@ -25,7 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getArticleBySlug(slug);
+  const language = await getLanguage();
+  const post = await getArticleBySlug(slug, language);
 
   if (!post) notFound();
 
@@ -71,7 +74,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* CONTENT */}
         <div
-          className="hero-animate blog-content mt-10 text-secondary [&_p]:mb-4 [&_h2]:text-[#2B3437] [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_a]:text-primary [&_a]:underline [&_a:hover:text-primary/80 transition-colors duration-200"
+          className="hero-animate blog-content mt-10 text-secondary"
           style={{ animationDelay: '320ms' }}
           dangerouslySetInnerHTML={{ __html: post.content }}
         />

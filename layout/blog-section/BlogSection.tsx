@@ -1,10 +1,12 @@
 import AnimateIn from '@/components/animateIn';
 import { getPublishedArticles } from '@/lib/supabase/queries/articles';
+import { getLanguage } from '@/lib/language.server';
 import Link from 'next/link';
 import BlogListingItem from '../blog-listing/BlogListingItem';
 
 export default async function BlogSection() {
-  const posts = await getPublishedArticles(3);
+  const language = await getLanguage();
+  const posts = await getPublishedArticles(3, language);
 
   return (
     <div className="w-full md:w-7xl md:px-8">

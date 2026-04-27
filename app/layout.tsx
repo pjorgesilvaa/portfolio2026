@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+import LanguageInit from '@/components/languageInit';
 import './globals.css';
 
 const inter = Inter({
@@ -22,7 +23,10 @@ export default function RootLayout({
     <html lang="en" className='scroll-smooth scroll-pt-21'>
       <GoogleAnalytics gaId="G-ZYPKYJVTQQ" />
       <GoogleTagManager gtmId="GTM-NSX6S6VJ" />
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} antialiased`}>
+        <LanguageInit />
+        {children}
+      </body>
     </html>
   );
 }

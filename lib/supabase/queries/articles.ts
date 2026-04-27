@@ -68,7 +68,7 @@ function mapRow(row: any): BlogPost {
     excerpt: row.excerpt ?? '',
     content: row.content ?? '',
     status: row.status,
-    language: row.language ?? 'en',
+    language: row.language ?? 'en-US',
     coverImageUrl: row.cover_image_url ?? '',
     metaTitle: row.meta_title ?? row.title,
     metaDescription: row.meta_description ?? '',
@@ -109,7 +109,7 @@ function mapRow(row: any): BlogPost {
   };
 }
 
-export async function getPublishedArticles(limit = 3): Promise<BlogPost[]> {
+export async function getPublishedArticles(limit = 3, language = 'en-US'): Promise<BlogPost[]> {
   const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
@@ -117,6 +117,7 @@ export async function getPublishedArticles(limit = 3): Promise<BlogPost[]> {
     .select(SELECT_FIELDS)
     .eq('status', 'published')
     .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+    .eq('language', language)
     .order('published_at', { ascending: false })
     .limit(limit);
 
@@ -128,7 +129,7 @@ export async function getPublishedArticles(limit = 3): Promise<BlogPost[]> {
   return (data ?? []).map(mapRow);
 }
 
-export async function getAllPublishedArticles(): Promise<BlogPost[]> {
+export async function getAllPublishedArticles(language = 'en-US'): Promise<BlogPost[]> {
   const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
@@ -136,6 +137,7 @@ export async function getAllPublishedArticles(): Promise<BlogPost[]> {
     .select(SELECT_FIELDS)
     .eq('status', 'published')
     .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+    .eq('language', language)
     .order('published_at', { ascending: false });
 
   if (error) {
@@ -153,11 +155,13 @@ export async function getArticlesWithFilters({
   search = '',
   categoryId = '',
   sort = 'newest',
+  language = 'en-US',
 }: {
   page?: number;
   search?: string;
   categoryId?: string;
   sort?: string;
+  language?: string;
 }): Promise<{ posts: BlogPost[]; total: number }> {
   const supabase = createServerSupabaseClient();
 
@@ -168,7 +172,8 @@ export async function getArticlesWithFilters({
     .from('articles')
     .select(SELECT_FIELDS, { count: 'exact' })
     .eq('status', 'published')
-    .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID);
+    .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+    .eq('language', language);
 
   if (search.trim()) {
     query = query.or(`title.ilike.%${search.trim()}%,excerpt.ilike.%${search.trim()}%`);
@@ -179,10 +184,10 @@ export async function getArticlesWithFilters({
   }
 
   switch (sort) {
-    case 'oldest':  query = query.order('published_at', { ascending: true }); break;
-    case 'shortest': query = query.order('reading_time_minutes', { ascending: true }); break;
+    case 'oldest':   query = query.order('published_at',        { ascending: true });  break;
+    case 'shortest': query = query.order('reading_time_minutes', { ascending: true });  break;
     case 'longest':  query = query.order('reading_time_minutes', { ascending: false }); break;
-    default:         query = query.order('published_at', { ascending: false });
+    default:         query = query.order('published_at',        { ascending: false });
   }
 
   const { data, count, error } = await query.range(from, to);
@@ -195,14 +200,16 @@ export async function getArticlesWithFilters({
   return { posts: (data ?? []).map(mapRow), total: count ?? 0 };
 }
 
-export async function getArticleBySlug(slug: string): Promise<BlogPost | null> {
+export async function getArticleBySlug(slug: string, language = 'en-US'): Promise<BlogPost | null> {
   const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
     .from('articles')
     .select(SELECT_FIELDS)
     .eq('slug', slug)
+    .eq('status', 'published')
     .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+    .eq('language', language)
     .single();
 
   if (error || !data) return null;

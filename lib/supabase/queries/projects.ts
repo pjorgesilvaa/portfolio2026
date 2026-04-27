@@ -11,6 +11,7 @@ const SELECT_FIELDS = `
   bannerUrl,
   project_git_url,
   project_deployed_url,
+  language,
   created_at,
   updated_at,
   sites (
@@ -48,6 +49,7 @@ function mapRow(row: any): Project {
     bannerUrl: row.bannerUrl ?? '',
     projectGitUrl: row.project_git_url ?? null,
     projectDeployedUrl: row.project_deployed_url ?? null,
+    language: row.language ?? 'en-US',
     createdAt: new Date(row.created_at),
     updatedAt: new Date(row.updated_at),
     site: site
@@ -56,13 +58,14 @@ function mapRow(row: any): Project {
   };
 }
 
-export async function getProjects(limit = 4): Promise<Project[]> {
+export async function getProjects(limit = 4, language = 'en-US'): Promise<Project[]> {
   const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
     .from('projects')
     .select(SELECT_FIELDS)
     .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+    .eq('language', language)
     .order('created_at', { ascending: false })
     .limit(limit);
 
@@ -78,7 +81,7 @@ export async function getProjects(limit = 4): Promise<Project[]> {
  * Fetch specific projects by slug, preserving the order of the input array.
  * Pass null for empty placeholder slots.
  */
-export async function getProjectsBySlots(slots: (string | null)[]): Promise<(Project | null)[]> {
+export async function getProjectsBySlots(slots: (string | null)[], language = 'en-US'): Promise<(Project | null)[]> {
   const supabase = createServerSupabaseClient();
 
   const slugs = slots.filter((s): s is string => s !== null);
@@ -88,6 +91,7 @@ export async function getProjectsBySlots(slots: (string | null)[]): Promise<(Pro
     .from('projects')
     .select(SELECT_FIELDS)
     .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+    .eq('language', language)
     .in('slug', slugs);
 
   if (error) {
@@ -99,7 +103,7 @@ export async function getProjectsBySlots(slots: (string | null)[]): Promise<(Pro
   return slots.map(slug => (slug ? (bySlug.get(slug) ?? null) : null));
 }
 
-export async function getProjectBySlug(slug: string): Promise<Project | null> {
+export async function getProjectBySlug(slug: string, language = 'en-US'): Promise<Project | null> {
   const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
@@ -107,6 +111,7 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     .select(SELECT_FIELDS)
     .eq('slug', slug)
     .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+    .eq('language', language)
     .single();
 
   if (error || !data) return null;
@@ -115,13 +120,14 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 
 export const PROJECTS_PER_PAGE = 6;
 
-export async function getAllProjects(): Promise<Project[]> {
+export async function getAllProjects(language = 'en-US'): Promise<Project[]> {
   const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
     .from('projects')
     .select(SELECT_FIELDS)
     .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+    .eq('language', language)
     .order('created_at', { ascending: false });
 
   if (error) {
@@ -136,10 +142,12 @@ export async function getProjectsWithFilters({
   page = 1,
   search = '',
   sort = 'newest',
+  language = 'en-US',
 }: {
   page?: number;
   search?: string;
   sort?: string;
+  language?: string;
 }): Promise<{ projects: Project[]; total: number }> {
   const supabase = createServerSupabaseClient();
 
@@ -149,17 +157,18 @@ export async function getProjectsWithFilters({
   let query = supabase
     .from('projects')
     .select(SELECT_FIELDS, { count: 'exact' })
-    .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID);
+    .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+    .eq('language', language);
 
   if (search.trim()) {
     query = query.or(`title.ilike.%${search.trim()}%,excerpt.ilike.%${search.trim()}%`);
   }
 
   switch (sort) {
-    case 'oldest':  query = query.order('created_at', { ascending: true });  break;
-    case 'a-z':     query = query.order('title',      { ascending: true });  break;
-    case 'z-a':     query = query.order('title',      { ascending: false }); break;
-    default:        query = query.order('created_at', { ascending: false });
+    case 'oldest': query = query.order('created_at', { ascending: true });  break;
+    case 'a-z':    query = query.order('title',      { ascending: true });  break;
+    case 'z-a':    query = query.order('title',      { ascending: false }); break;
+    default:       query = query.order('created_at', { ascending: false });
   }
 
   const { data, count, error } = await query.range(from, to);
