@@ -1,13 +1,12 @@
 import AnimateIn from '@/components/animateIn';
 import { getPublishedArticles } from '@/lib/supabase/queries/articles';
-import { getLanguage } from '@/lib/language.server';
+import { getLanguage, getLocale } from '@/lib/language.server';
 import { getT } from '@/lib/i18n.server';
 import Link from 'next/link';
 import BlogListingItem from '../blog-listing/BlogListingItem';
 
 export default async function BlogSection() {
-  const language = await getLanguage();
-  const t = await getT();
+  const [language, locale, t] = await Promise.all([getLanguage(), getLocale(), getT()]);
   const posts = await getPublishedArticles(3, language);
 
   return (
@@ -19,7 +18,7 @@ export default async function BlogSection() {
           <p className="text-lg text-[#5A677A] mt-2">{t.blog.subtitle}</p>
         </div>
         <Link
-          href="/blog"
+          href={`/${locale}/blog`}
           className="shrink-0 text-sm font-semibold text-primary border border-primary rounded-md px-4 py-2 hover:bg-primary hover:text-white hover:scale-105 active:scale-95 transition-all duration-200"
         >
           {t.blog.viewAll}
@@ -31,7 +30,7 @@ export default async function BlogSection() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-8 md:mt-32">
           {posts.map((post, index) => (
-            <BlogListingItem post={post} key={post.id} index={index} noImageLabel={t.blogListing.noImage} />
+            <BlogListingItem post={post} key={post.id} index={index} locale={locale} noImageLabel={t.blogListing.noImage} />
           ))}
         </div>
       )}

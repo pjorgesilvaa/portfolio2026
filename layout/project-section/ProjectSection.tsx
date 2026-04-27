@@ -1,6 +1,6 @@
 import AnimateIn from '@/components/animateIn';
 import { getProjectsBySlots } from '@/lib/supabase/queries/projects';
-import { getLanguage } from '@/lib/language.server';
+import { getLanguage, getLocale } from '@/lib/language.server';
 import { getT } from '@/lib/i18n.server';
 import Link from 'next/link';
 
@@ -14,7 +14,7 @@ const FEATURED_SLOTS: (string | null)[] = [
 // ────────────────────────────────────────────────────────────────────────────
 
 export default async function ProjectSection() {
-  const language = await getLanguage();
+  const [language, locale] = await Promise.all([getLanguage(), getLocale()]);
   const [projects, t] = await Promise.all([
     getProjectsBySlots(FEATURED_SLOTS, language),
     getT(),
@@ -35,7 +35,7 @@ export default async function ProjectSection() {
           <p className="text-sm md:text-lg text-secondary mt-2">{t.projects.subtitle}</p>
         </div>
         <Link
-          href="/projects"
+          href={`/${locale}/projects`}
           className="shrink-0 text-sm font-semibold text-primary border border-primary rounded-md px-4 py-2 hover:bg-primary hover:text-white hover:scale-105 active:scale-95 transition-all duration-200"
         >
           {t.projects.viewAll}
@@ -69,7 +69,7 @@ export default async function ProjectSection() {
           return (
             <Link
               key={project.id}
-              href={`/projects/${project.slug}`}
+              href={`/${locale}/projects/${project.slug}`}
               className={`${span} group hero-animate block`}
               style={delay}
             >

@@ -3,16 +3,18 @@ import Link from 'next/link';
 export default function BlogListingItem({
   post,
   index,
+  locale,
   noImageLabel = 'No cover image',
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post: any;
   index: number;
+  locale: string;
   noImageLabel?: string;
 }) {
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={`/${locale}/blog/${post.slug}`}
       className="group block hero-animate"
       style={{ animationDelay: `${300 + index * 80}ms` }}
     >

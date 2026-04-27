@@ -3,13 +3,13 @@
     "projects": "Projetos",
     "work": "Experiência",
     "feedback": "Feedback",
-    "journal": "Diário",
+    "journal": "Jornal",
     "getInTouch": "Contacto"
   },
   "hero": {
     "role": "Senior FullStack Engineer",
-    "line1": "Transformar ideias",
-    "line2": "em produtos digitais",
+    "line1": "Tornar ideias",
+    "line2": "em soluções",
     "line3": "escaláveis.",
     "description": "Focado em sistemas de alto desempenho, arquitetura limpa e impacto real utilizando .NET, React e tecnologias cloud-native.",
     "viewProjects": "Ver Projetos",
@@ -27,35 +27,35 @@
         "company": "Sonae — SC Fitness",
         "place": "Maia, PT",
         "period": "2026 — Presente",
-        "description": "Liderando o desenvolvimento e evolução do ecossistema digital do SC Fitness, incluindo duas aplicações móveis com mais de 150 mil utilizadores, juntamente com websites públicos e sistemas de backend partilhados. Responsável pela arquitetura, entrega de funcionalidades e garantia de desempenho, escalabilidade e fiabilidade em todas as plataformas."
+        "description": "Liderei o desenvolvimento e evolução do ecossistema digital da SC Fitness, incluindo duas aplicações móveis com mais de 150 mil utilizadores, juntamente com websites públicos e sistemas de backend partilhados. Responsável pela arquitetura, entrega de funcionalidades e garantia de desempenho, escalabilidade e fiabilidade em todas as plataformas."
       },
       {
         "title": "Tech Lead",
         "company": "Axians",
         "place": "Lisboa, PT",
         "period": "2025 — 2026",
-        "description": "Liderou o desenvolvimento de uma plataforma de grande escala para o Ministério da Justiça Português. Desenhou APIs baseadas em microsserviços, geriu pipelines de CI/CD complexos e atuou como principal ponto de contacto técnico com as partes interessadas. Orientou a equipa em arquitetura, entrega e boas práticas de engenharia."
+        "description": "Liderei o desenvolvimento de uma plataforma de grande escala para o Ministério da Justiça Português. Desenhei APIs baseadas em microsserviços, geri pipelines de CI/CD complexas e atuei como principal ponto de contacto técnico com as partes interessadas. Orientei a equipa em arquitetura, entrega e boas práticas de engenharia."
       },
       {
         "title": "Full Stack Developer",
         "company": "Noesis",
         "place": "Matosinhos, PT",
         "period": "2023 — 2025",
-        "description": "Desenvolveu e manteve múltiplas aplicações full stack para vários clientes, contribuindo para arquiteturas de frontend e backend. Mentorizou programadores júnior, melhorou os padrões de desenvolvimento e liderou a entrega de um portal full stack para a Autoridade da Concorrência."
+        "description": "Desenvolvi e mantive múltiplas aplicações full stack para vários clientes, contribuindo para arquiteturas de frontend e backend. Prestei mentoria a programadores júnior, melhorei os padrões de desenvolvimento e liderei a entrega de um portal full stack para a Autoridade da Concorrência."
       },
       {
         "title": "Junior Full Stack Developer",
         "company": "Noesis",
         "place": "Matosinhos, PT",
         "period": "2021 — 2023",
-        "description": "Contribuiu para várias aplicações React e .NET, colaborando com engenheiros seniores na construção e manutenção de sistemas em produção. Liderou o desenvolvimento de uma ferramenta interna de gestão de problemas que melhorou significativamente a eficiência da equipa e a receita."
+        "description": "Contribui para várias aplicações React e .NET, colaborando com engenheiros seniores na construção e manutenção de sistemas em produção. Liderei o desenvolvimento de uma ferramenta interna de gestão de problemas que melhorou significativamente a eficiência da equipa e a receita."
       },
       {
         "title": "Estagiário de Frontend",
         "company": "GECAD",
         "place": "Porto, PT",
         "period": "2021 — 2021",
-        "description": "Desenvolveu um portal de gestão de edifícios inteligentes em Vue.js, permitindo monitorização e controlo de dispositivos em tempo real. Implementou sistemas de alertas com MQTT e trabalhou diretamente com clientes num ambiente ágil."
+        "description": "Desenvolvi um portal de gestão de edifícios inteligentes em Vue.js, permitindo monitorização e controlo de dispositivos em tempo real. Implementei sistemas de alertas com MQTT e trabalhei diretamente com clientes num ambiente ágil."
       }
     ]
   },
@@ -88,14 +88,14 @@
   },
   "blog": {
     "eyebrow": "Perspetivas & Reflexões",
-    "title": "O Diário Curado",
+    "title": "O Jornal Curado",
     "subtitle": "Explore os meus últimos pensamentos e perspetivas sobre design, tecnologia e negócio.",
     "viewAll": "Ver todos os artigos →",
     "empty": "Ainda não há artigos publicados. Volte em breve."
   },
   "blogListing": {
     "eyebrow": "Perspetivas & Reflexões",
-    "title": "O Diário Curado",
+    "title": "O Jornal Curado",
     "countSingular": "{count} artigo publicado",
     "countPlural": "{count} artigos publicados",
     "searchPlaceholder": "Pesquisar artigos...",
@@ -152,7 +152,7 @@
     "copyright": "© 2026 Paulo Silva. Todos os direitos reservados."
   },
   "blogPost": {
-    "backToJournal": "Voltar ao Diário"
+    "backToJournal": "Voltar ao Jornal"
   },
   "projectPost": {
     "backToProjects": "Voltar aos Projetos",

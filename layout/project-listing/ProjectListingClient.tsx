@@ -3,7 +3,7 @@
 import Project from '@/models/project';
 import CustomSelect from '@/components/customSelect';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import type { Translations } from '@/lib/i18n';
 import { tr } from '@/lib/i18n';
@@ -30,6 +30,8 @@ export default function ProjectListingClient({
   t,
 }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] ?? 'en';
   const [search, setSearch] = useState(currentSearch);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -52,7 +54,7 @@ export default function ProjectListingClient({
     if (sortVal && sortVal !== 'newest') params.set('sort',   sortVal);
     if (pageVal > 1)                     params.set('page',   String(pageVal));
 
-    router.push(`/projects${params.size ? `?${params}` : ''}`);
+    router.push(`/${locale}/projects${params.size ? `?${params}` : ''}`);
   }
 
   function handleSearchChange(value: string) {
@@ -129,7 +131,7 @@ export default function ProjectListingClient({
           {projects.map((project, index) => (
             <Link
               key={project.id}
-              href={`/projects/${project.slug}`}
+              href={`/${locale}/projects/${project.slug}`}
               className="group block hero-animate"
               style={{ animationDelay: `${300 + index * 80}ms` }}
             >

@@ -3,7 +3,7 @@
 import BlogPost from '@/models/blogPost';
 import { CategoryOption } from '@/lib/supabase/queries/categories';
 import CustomSelect from '@/components/customSelect';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import BlogListingItem from './BlogListingItem';
 import type { Translations } from '@/lib/i18n';
@@ -35,6 +35,8 @@ export default function BlogListingClient({
   t,
 }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = pathname.split('/')[1] ?? 'en';
   const [search, setSearch] = useState(currentSearch);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -61,7 +63,7 @@ export default function BlogListingClient({
     if (sortVal && sortVal !== 'newest') params.set('sort', sortVal);
     if (pageVal > 1) params.set('page', String(pageVal));
 
-    router.push(`/blog${params.size ? `?${params}` : ''}`);
+    router.push(`/${locale}/blog${params.size ? `?${params}` : ''}`);
   }
 
   function handleSearchChange(value: string) {
@@ -173,7 +175,7 @@ export default function BlogListingClient({
       ) : (
         <div key={gridKey} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post, index) => (
-            <BlogListingItem post={post} key={post.id} index={index} noImageLabel={t.noImage} />
+            <BlogListingItem post={post} key={post.id} index={index} locale={locale} noImageLabel={t.noImage} />
           ))}
         </div>
       )}
