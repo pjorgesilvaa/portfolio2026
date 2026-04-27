@@ -1,41 +1,22 @@
 import AnimateIn from '@/components/animateIn';
+import { getProjectsBySlots } from '@/lib/supabase/queries/projects';
 import Link from 'next/link';
 
-export default function ProjectSection() {
-  const projectItems = [
-    {
-      id: 'blank-project-1',
-      title: 'No project yet.',
-      description:
-        'This section will be updated soon with selected projects that showcase my expertise and impact in the industry. Stay tuned for exciting updates on my work and contributions to various projects.',
-      tags: ['Coming Soon', 'Stay Tuned', 'Exciting Updates'],
-      bannerUrl: null,
-    },
-    {
-      id: 'blank-project-2',
-      title: 'No project yet.',
-      description:
-        'This section will be updated soon with selected projects that showcase my expertise and impact in the industry. Stay tuned for exciting updates on my work and contributions to various projects.',
-      tags: ['Coming Soon', 'Stay Tuned', 'Exciting Updates'],
-      bannerUrl: null,
-    },
-    {
-      id: 'portfolio-2026',
-      title: 'Portfolio 2026',
-      description:
-        'A more ambitious evolution of my personal website, featuring a project section where I share my accomplishments on life as a developer in Portugal. Heavily inspired by designers I admire, with a stronger focus on visual identity and content.',
-      tags: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],
-      bannerUrl: 'images/portfolio-2026.png',
-    },
-    {
-      id: 'portfolio-2025',
-      title: 'Portfolio 2025',
-      description:
-        'A simple, straightforward personal portfolio built with the goal of creating something I would be proud to share. Focused on reliability, clarity, and responsive design, ensuring the site worked smoothly across all devices.',
-      tags: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Vercel'],
-      bannerUrl: 'images/portfolio-2025.png',
-    },
-  ];
+// ── Define exactly which projects appear and in which slot ──────────────────
+const FEATURED_SLOTS: (string | null)[] = [
+  null,             // slot 1 — empty
+  null,             // slot 2 — empty
+  'portfolio-2026', // slot 3
+  'portfolio-2025', // slot 4
+];
+// ────────────────────────────────────────────────────────────────────────────
+
+export default async function ProjectSection() {
+  const projects = await getProjectsBySlots(FEATURED_SLOTS);
+
+  // Col-span pattern: 2-1-1-2-2-1-1-2...
+  const spanClass = (index: number) =>
+    index % 4 === 0 || index % 4 === 3 ? 'md:col-span-2' : 'md:col-span-1';
 
   return (
     <div className="w-full md:w-7xl m-auto flex flex-col items-start gap-8 md:gap-16 md:px-8">
@@ -44,7 +25,7 @@ export default function ProjectSection() {
       <AnimateIn className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-4" animation="fade-up">
         <div>
           <h2 className="text-primary font-semibold uppercase">Selected Projects</h2>
-          <h3 className="text-2xl md:text-4xl font-bold text-[#2B3437]">Work I am proud of.</h3>
+          <h3 className="text-2xl md:text-4xl font-bold text-[#2B3437]">What I've been working on</h3>
           <p className="text-sm md:text-lg text-secondary mt-2">Built with scalability, performance, and production reliability in mind.</p>
         </div>
         <Link
@@ -55,26 +36,45 @@ export default function ProjectSection() {
         </Link>
       </AnimateIn>
 
-      {/* GRID — layout/sizes unchanged */}
+      {/* GRID */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-        {projectItems.map((item, index) => {
-          const spanClass = index === 0 ? 'md:col-span-2' : index === 1 ? 'md:col-span-1' : index === 2 ? 'md:col-span-1' : 'md:col-span-2';
+        {projects.map((project, index) => {
+          const span = `col-span-1 ${spanClass(index)}`;
+          const delay = { animationDelay: `${300 + index * 80}ms` };
+
+          // Empty slot
+          if (!project) {
+            return (
+              <div key={`empty-${index}`} className={`${span} hero-animate`} style={delay}>
+                <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full">
+                  <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
+                    <span className="text-gray-400 text-sm">Coming soon</span>
+                  </div>
+                  <div className="p-6 flex flex-col gap-3 flex-1">
+                    <div className="h-5 w-2/3 bg-gray-100 rounded" />
+                    <div className="h-4 w-full bg-gray-100 rounded" />
+                    <div className="h-4 w-4/5 bg-gray-100 rounded" />
+                  </div>
+                </div>
+              </div>
+            );
+          }
 
           return (
             <Link
-              key={item.id}
-              href={`/projects/${item.id}`}
-              className={`col-span-1 ${spanClass} group hero-animate block`}
-              style={{ animationDelay: `${300 + index * 80}ms` }}
+              key={project.id}
+              href={`/projects/${project.slug}`}
+              className={`${span} group hero-animate block`}
+              style={delay}
             >
               <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
 
                 {/* COVER */}
                 <div className="relative overflow-hidden">
-                  {item.bannerUrl ? (
+                  {project.bannerUrl ? (
                     <img
-                      src={item.bannerUrl}
-                      alt={item.title}
+                      src={project.bannerUrl}
+                      alt={project.title}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
@@ -87,19 +87,23 @@ export default function ProjectSection() {
                 {/* BODY */}
                 <div className="p-6 flex flex-col gap-3 flex-1">
                   <h3 className="text-lg font-bold text-[#2B3437] line-clamp-2 group-hover:text-primary transition-colors duration-200">
-                    {item.title}
+                    {project.title}
                   </h3>
-                  <p className="text-secondary text-sm line-clamp-3 flex-1">{item.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {item.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="text-xs font-semibold text-secondary bg-gray-100 rounded-full px-3 py-1"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-secondary text-sm line-clamp-3 flex-1">{project.excerpt}</p>
+                  {project.tags.length > 0 && (
+                    <>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {project.tags.map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="text-xs font-semibold text-secondary bg-gray-100 rounded-full px-3 py-1"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
 
               </div>
@@ -107,6 +111,7 @@ export default function ProjectSection() {
           );
         })}
       </div>
+
     </div>
   );
 }
