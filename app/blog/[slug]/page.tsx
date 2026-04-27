@@ -2,7 +2,6 @@ import { getArticleBySlug } from '@/lib/supabase/queries/articles';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import './page.css';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -71,7 +70,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* CONTENT */}
         <div
-          className="hero-animate blog-content mt-10 text-secondary"
+          className="hero-animate blog-content mt-10 text-secondary [&_p]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-8 [&_h2]:mb-4 [&_a]:text-primary [&_a]:underline [&_a:hover:text-primary/80 transition-colors duration-200"
           style={{ animationDelay: '320ms' }}
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
@@ -83,7 +82,7 @@ export default async function BlogPostPage({ params }: Props) {
           ) : (
             <div className="w-12 h-12 rounded-xl bg-gray-200 shrink-0" />
           )}
-          <div className='flex flex-col justify-end items-start'>
+          <div className="flex flex-col justify-end items-start">
             <p className="text-primary font-bold mb-0!">{post.author.name}</p>
             <p className="text-secondary text-sm mb-0!">
               {formattedDate}

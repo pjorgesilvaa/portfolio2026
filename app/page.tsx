@@ -26,7 +26,7 @@ export default function Home() {
       <section className="md:min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="form">
         <FormSection />
       </section>
-      <section className="bg-[#EFF4F7] min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="feedback">
+      <section className="bg-[#EFF4F7] min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="journal">
         <BlogSection />
       </section>
       <section className="bg-[#EFF4F7] px-8 py-8 drop-shadow-xs flex items-center justify-center">

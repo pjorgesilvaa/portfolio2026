@@ -17,6 +17,9 @@ export default function Header() {
           <Link href="/#feedback" className="text-secondary text-lg font-bold mx-4 hover:text-primary transition-colors duration-300">
             Feedback
           </Link>
+          <Link href="/#journal" className="text-secondary text-lg font-bold mx-4 hover:text-primary transition-colors duration-300">
+            Journal
+          </Link>
         </nav>
         <Link
           href="/#form"

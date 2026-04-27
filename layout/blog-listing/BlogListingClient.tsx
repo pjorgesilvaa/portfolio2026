@@ -111,7 +111,7 @@ export default function BlogListingClient({
 
       {/* CATEGORY PILLS */}
       {categories.length > 0 && (
-        <div className="flex gap-2 mb-8 overflow-x-auto pb-1 hero-animate [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" style={{ animationDelay: '220ms' }}>
+        <div className="flex gap-2 mb-8 px-px py-4 overflow-x-auto pb-1 hero-animate [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" style={{ animationDelay: '220ms' }}>
           <button
             onClick={() => navigate({ category: '', page: 1 })}
             className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-105 active:scale-95 ${
