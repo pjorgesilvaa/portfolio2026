@@ -2,6 +2,7 @@
 
 import BlogPost from '@/models/blogPost';
 import { CategoryOption } from '@/lib/supabase/queries/categories';
+import CustomSelect from '@/components/customSelect';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -101,23 +102,11 @@ export default function BlogListingClient({
             className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white border border-gray-200 text-[#2B3437] placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
           />
         </div>
-        <div className="relative w-full md:w-auto">
-          <select
-            value={currentSort}
-            onChange={e => navigate({ sort: e.target.value, page: 1 })}
-            style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }}
-            className="w-full pl-4 pr-10 py-2.5 rounded-lg bg-white border border-gray-200 text-[#2B3437] outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 cursor-pointer"
-          >
-            {SORT_OPTIONS.map(opt => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-          </select>
-          <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-            <svg className="w-4 h-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
-        </div>
+        <CustomSelect
+          value={currentSort as 'newest' | 'oldest' | 'shortest' | 'longest'}
+          options={SORT_OPTIONS}
+          onChange={val => navigate({ sort: val, page: 1 })}
+        />
       </div>
 
       {/* CATEGORY PILLS */}
