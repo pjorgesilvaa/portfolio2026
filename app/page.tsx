@@ -29,7 +29,7 @@ export default function Home() {
       <section className="bg-[#EFF4F7] min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="journal">
         <BlogSection />
       </section>
-      <section className="bg-[#EFF4F7] px-8 py-8 drop-shadow-xs flex items-center justify-center">
+      <section className="px-8 py-8 drop-shadow-xs flex items-center justify-center">
         <FooterSection />
       </section>
     </>

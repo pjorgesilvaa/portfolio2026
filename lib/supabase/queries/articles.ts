@@ -202,7 +202,6 @@ export async function getArticleBySlug(slug: string): Promise<BlogPost | null> {
     .from('articles')
     .select(SELECT_FIELDS)
     .eq('slug', slug)
-    .eq('status', 'published')
     .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
     .single();
 
