@@ -1,6 +1,7 @@
 import AnimateIn from '@/components/animateIn';
 import { getProjectsBySlots } from '@/lib/supabase/queries/projects';
 import { getLanguage } from '@/lib/language.server';
+import { getT } from '@/lib/i18n.server';
 import Link from 'next/link';
 
 // ── Define exactly which projects appear and in which slot ──────────────────
@@ -14,7 +15,10 @@ const FEATURED_SLOTS: (string | null)[] = [
 
 export default async function ProjectSection() {
   const language = await getLanguage();
-  const projects = await getProjectsBySlots(FEATURED_SLOTS, language);
+  const [projects, t] = await Promise.all([
+    getProjectsBySlots(FEATURED_SLOTS, language),
+    getT(),
+  ]);
 
   // Col-span pattern: 2-1-1-2-2-1-1-2...
   const spanClass = (index: number) =>
@@ -26,15 +30,15 @@ export default async function ProjectSection() {
       {/* HEADER */}
       <AnimateIn className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-4" animation="fade-up">
         <div>
-          <h2 className="text-primary font-semibold uppercase">Selected Projects</h2>
-          <h3 className="text-2xl md:text-4xl font-bold text-[#2B3437]">What I've been working on</h3>
-          <p className="text-sm md:text-lg text-secondary mt-2">Built with scalability, performance, and production reliability in mind.</p>
+          <h2 className="text-primary font-semibold uppercase">{t.projects.eyebrow}</h2>
+          <h3 className="text-2xl md:text-4xl font-bold text-[#2B3437]">{t.projects.title}</h3>
+          <p className="text-sm md:text-lg text-secondary mt-2">{t.projects.subtitle}</p>
         </div>
         <Link
           href="/projects"
           className="shrink-0 text-sm font-semibold text-primary border border-primary rounded-md px-4 py-2 hover:bg-primary hover:text-white hover:scale-105 active:scale-95 transition-all duration-200"
         >
-          View all projects →
+          {t.projects.viewAll}
         </Link>
       </AnimateIn>
 
@@ -50,7 +54,7 @@ export default async function ProjectSection() {
               <div key={`empty-${index}`} className={`${span} hero-animate`} style={delay}>
                 <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full">
                   <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
-                    <span className="text-gray-400 text-sm">Coming soon</span>
+                    <span className="text-gray-400 text-sm">{t.projects.comingSoon}</span>
                   </div>
                   <div className="p-6 flex flex-col gap-3 flex-1">
                     <div className="h-5 w-2/3 bg-gray-100 rounded" />
@@ -81,7 +85,7 @@ export default async function ProjectSection() {
                     />
                   ) : (
                     <div className="w-full h-48 bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
-                      <span className="text-gray-400 text-sm">No cover image</span>
+                      <span className="text-gray-400 text-sm">{t.projectListing.noImage}</span>
                     </div>
                   )}
                 </div>
@@ -93,18 +97,16 @@ export default async function ProjectSection() {
                   </h3>
                   <p className="text-secondary text-sm line-clamp-3 flex-1">{project.excerpt}</p>
                   {project.tags.length > 0 && (
-                    <>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {project.tags.map((tag, tagIndex) => (
-                          <span
-                            key={tagIndex}
-                            className="text-xs font-semibold text-secondary bg-gray-100 rounded-full px-3 py-1"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {project.tags.map((tag, tagIndex) => (
+                        <span
+                          key={tagIndex}
+                          className="text-xs font-semibold text-secondary bg-gray-100 rounded-full px-3 py-1"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   )}
                 </div>
 

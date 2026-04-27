@@ -6,8 +6,11 @@ import Header from '@/layout/header/header';
 import HeroSection from '@/layout/hero-section/heroSection';
 import ProjectSection from '@/layout/project-section/ProjectSection';
 import WorkSection from '@/layout/work-section/workSection';
+import { getT } from '@/lib/i18n.server';
 
-export default function Home() {
+export default async function Home() {
+  const t = await getT();
+
   return (
     <>
       <Header />
@@ -24,7 +27,7 @@ export default function Home() {
         <FeedbackSection />
       </section>
       <section className="md:min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="form">
-        <FormSection />
+        <FormSection t={t.form} />
       </section>
       <section className="bg-[#EFF4F7] min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="journal">
         <BlogSection />

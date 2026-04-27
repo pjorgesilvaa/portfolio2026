@@ -1,0 +1,162 @@
+{
+  "nav": {
+    "projects": "Projetos",
+    "work": "Experiência",
+    "feedback": "Feedback",
+    "journal": "Diário",
+    "getInTouch": "Contacto"
+  },
+  "hero": {
+    "role": "Senior FullStack Engineer",
+    "line1": "Transformar ideias",
+    "line2": "em produtos digitais",
+    "line3": "escaláveis.",
+    "description": "Focado em sistemas de alto desempenho, arquitetura limpa e impacto real utilizando .NET, React e tecnologias cloud-native.",
+    "viewProjects": "Ver Projetos",
+    "readFeedback": "Ler Feedback"
+  },
+  "work": {
+    "eyebrow": "Percurso Profissional",
+    "title": "Experiência forjada na indústria.",
+    "subtitle": "Mais de 5 anos de experiência, de júnior a tech lead, entregando sistemas de nível produtivo em web e cloud.",
+    "downloadResume": "Descarregar CV",
+    "resumeSize": "PDF, 146 KB",
+    "items": [
+      {
+        "title": "Senior Full Stack Developer",
+        "company": "Sonae — SC Fitness",
+        "place": "Maia, PT",
+        "period": "2026 — Presente",
+        "description": "Liderando o desenvolvimento e evolução do ecossistema digital do SC Fitness, incluindo duas aplicações móveis com mais de 150 mil utilizadores, juntamente com websites públicos e sistemas de backend partilhados. Responsável pela arquitetura, entrega de funcionalidades e garantia de desempenho, escalabilidade e fiabilidade em todas as plataformas."
+      },
+      {
+        "title": "Tech Lead",
+        "company": "Axians",
+        "place": "Lisboa, PT",
+        "period": "2025 — 2026",
+        "description": "Liderou o desenvolvimento de uma plataforma de grande escala para o Ministério da Justiça Português. Desenhou APIs baseadas em microsserviços, geriu pipelines de CI/CD complexos e atuou como principal ponto de contacto técnico com as partes interessadas. Orientou a equipa em arquitetura, entrega e boas práticas de engenharia."
+      },
+      {
+        "title": "Full Stack Developer",
+        "company": "Noesis",
+        "place": "Matosinhos, PT",
+        "period": "2023 — 2025",
+        "description": "Desenvolveu e manteve múltiplas aplicações full stack para vários clientes, contribuindo para arquiteturas de frontend e backend. Mentorizou programadores júnior, melhorou os padrões de desenvolvimento e liderou a entrega de um portal full stack para a Autoridade da Concorrência."
+      },
+      {
+        "title": "Junior Full Stack Developer",
+        "company": "Noesis",
+        "place": "Matosinhos, PT",
+        "period": "2021 — 2023",
+        "description": "Contribuiu para várias aplicações React e .NET, colaborando com engenheiros seniores na construção e manutenção de sistemas em produção. Liderou o desenvolvimento de uma ferramenta interna de gestão de problemas que melhorou significativamente a eficiência da equipa e a receita."
+      },
+      {
+        "title": "Estagiário de Frontend",
+        "company": "GECAD",
+        "place": "Porto, PT",
+        "period": "2021 — 2021",
+        "description": "Desenvolveu um portal de gestão de edifícios inteligentes em Vue.js, permitindo monitorização e controlo de dispositivos em tempo real. Implementou sistemas de alertas com MQTT e trabalhou diretamente com clientes num ambiente ágil."
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Projetos Selecionados",
+    "title": "No que tenho trabalhado",
+    "subtitle": "Construído com escalabilidade, desempenho e fiabilidade de produção em mente.",
+    "viewAll": "Ver todos os projetos →",
+    "comingSoon": "Em breve",
+    "empty": "Ainda não há projetos publicados. Volte em breve."
+  },
+  "projectListing": {
+    "eyebrow": "Projetos Selecionados",
+    "title": "Todos os Projetos",
+    "countSingular": "{count} projeto publicado",
+    "countPlural": "{count} projetos publicados",
+    "searchPlaceholder": "Pesquisar projetos...",
+    "sortNewest": "Mais recentes",
+    "sortOldest": "Mais antigos",
+    "sortAZ": "A → Z",
+    "sortZA": "Z → A",
+    "resultsSingular": "{count} resultado encontrado",
+    "resultsPlural": "{count} resultados encontrados",
+    "empty": "Nenhum projeto encontrado",
+    "emptyHint": "Tente ajustar a sua pesquisa ou filtros.",
+    "prev": "← Anterior",
+    "next": "Seguinte →",
+    "noImage": "Sem imagem de capa",
+    "categoryAll": "Todos"
+  },
+  "blog": {
+    "eyebrow": "Perspetivas & Reflexões",
+    "title": "O Diário Curado",
+    "subtitle": "Explore os meus últimos pensamentos e perspetivas sobre design, tecnologia e negócio.",
+    "viewAll": "Ver todos os artigos →",
+    "empty": "Ainda não há artigos publicados. Volte em breve."
+  },
+  "blogListing": {
+    "eyebrow": "Perspetivas & Reflexões",
+    "title": "O Diário Curado",
+    "countSingular": "{count} artigo publicado",
+    "countPlural": "{count} artigos publicados",
+    "searchPlaceholder": "Pesquisar artigos...",
+    "sortNewest": "Mais recentes",
+    "sortOldest": "Mais antigos",
+    "sortShortest": "Leitura mais curta",
+    "sortLongest": "Leitura mais longa",
+    "resultsSingular": "{count} resultado encontrado",
+    "resultsPlural": "{count} resultados encontrados",
+    "empty": "Nenhum artigo encontrado",
+    "emptyHint": "Tente ajustar a sua pesquisa ou filtros.",
+    "prev": "← Anterior",
+    "next": "Seguinte →",
+    "noImage": "Sem imagem de capa"
+  },
+  "feedback": {
+    "eyebrow": "Feedback",
+    "title": "Vozes de Confiança",
+    "items": [
+      {
+        "quote": "O Paulo é alguém em quem se pode confiar para construir sistemas escaláveis e fiáveis. As suas decisões de arquitetura são bem pensadas e facilitam consistentemente o meu trabalho, especialmente na integração de soluções de IA. Conheço-o há muito tempo e sempre apreciei a abertura para discutir ideias. É alguém com quem posso contar sempre que preciso de pensar em desafios técnicos. Preocupa-se genuinamente com o que faz e tem orgulho em entregar soluções de alta qualidade e bem construídas.",
+        "name": "José Araújo",
+        "role": "Engenheiro de IA"
+      },
+      {
+        "quote": "Trabalhar com o Paulo no website de e-commerce da Vellonti foi uma experiência muito fluida. Como fundador sem um background técnico profundo, tinha frequentemente ideias complexas sobre o produto e a experiência do utilizador que nem sempre eram fáceis de traduzir em requisitos técnicos. O Paulo tinha uma capacidade real de decompor esses conceitos em soluções claras e práticas, orientando a implementação de forma a tornar tudo fácil de entender e iterar.",
+        "name": "Simão Carvalho",
+        "role": "Fundador, Vellonti"
+      },
+      {
+        "quote": "O Paulo e eu conhecemo-nos na faculdade, e mais tarde acabámos por trabalhar juntos na Noesis. Temos partilhado o mesmo percurso profissional desde então, crescendo lado a lado como Full Stack Developers. Ao longo desse tempo, sempre o achei fácil de trabalhar — tem uma forma estruturada de pensar, toma decisões técnicas sólidas e comunica de forma muito clara e prática.",
+        "name": "Gonçalo Pinto",
+        "role": "Tech Lead"
+      }
+    ]
+  },
+  "form": {
+    "title": "Vamos construir algo escalável",
+    "subtitle": "Da ideia à produção, ajudo a desenhar e construir sistemas escaláveis e de alto desempenho.",
+    "location": "Porto, Portugal • Luxemburgo • Remoto",
+    "nameLabel": "Nome",
+    "namePlaceholder": "João Silva",
+    "emailLabel": "Email",
+    "emailPlaceholder": "joao@exemplo.com",
+    "messageLabel": "Resumo da Proposta",
+    "messagePlaceholder": "Descreva a sua proposta...",
+    "send": "Enviar Mensagem",
+    "sending": "A enviar...",
+    "successTitle": "Mensagem enviada!",
+    "successSubtitle": "Responderei em breve",
+    "error": "Algo correu mal. Tente novamente mais tarde."
+  },
+  "footer": {
+    "copyright": "© 2026 Paulo Silva. Todos os direitos reservados."
+  },
+  "blogPost": {
+    "backToJournal": "Voltar ao Diário"
+  },
+  "projectPost": {
+    "backToProjects": "Voltar aos Projetos",
+    "viewOnGithub": "Ver no GitHub",
+    "viewLive": "Ver em Produção"
+  }
+}

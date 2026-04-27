@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { sendEmail } from '@/app/actions/sendEmail';
 import { useRef, useState } from 'react';
 import AnimateIn from '@/components/animateIn';
+import type { Translations } from '@/lib/i18n';
 
-export default function FormSection() {
+export default function FormSection({ t }: { t: Translations['form'] }) {
   const formRef = useRef<HTMLFormElement>(null);
 
   const [loading, setLoading] = useState(false);
@@ -33,11 +34,11 @@ export default function FormSection() {
           {/* LEFT SIDE */}
           <AnimateIn animation="fade-left" delay={150}>
             <h2 className="font-headline text-2xl md:text-5xl font-bold text-on-primary leading-tight">
-              Let’s build something that scales
+              {t.title}
             </h2>
 
             <p className="text-on-primary opacity-80 text-sm md:text-lg md:mt-4 mt-8">
-              From idea to production, I help design and build scalable, high-performance systems.
+              {t.subtitle}
             </p>
 
             <div className="mt-6 md:mt-12">
@@ -50,7 +51,7 @@ export default function FormSection() {
 
               <div className="flex items-center gap-4 text-on-primary mt-2 md:mt-6">
                 <MapPin className="min-w-6 min-h-6" />
-                <span className="font-medium text-sm md:text-base">Porto, Portugal • Luxembourg • Remote</span>
+                <span className="font-medium text-sm md:text-base">{t.location}</span>
               </div>
             </div>
           </AnimateIn>
@@ -63,8 +64,8 @@ export default function FormSection() {
               <div className="absolute inset-0 flex items-center justify-center bg-white/90 z-10 animate-fadeIn">
                 <div className="text-center">
                   <div className="text-4xl mb-2 animate-bounce">🚀</div>
-                  <p className="font-bold text-[#2B3437]">Message sent!</p>
-                  <p className="text-sm text-[#2B3437]">I'll get back to you soon</p>
+                  <p className="font-bold text-[#2B3437]">{t.successTitle}</p>
+                  <p className="text-sm text-[#2B3437]">{t.successSubtitle}</p>
                 </div>
               </div>
             )}
@@ -112,13 +113,13 @@ export default function FormSection() {
 
               {/* NAME */}
               <div>
-                <label className="block text-sm font-semibold text-secondary mb-2">Name</label>
+                <label className="block text-sm font-semibold text-secondary mb-2">{t.nameLabel}</label>
                 <input
                   name="name"
                   value={formState.name}
                   onChange={e => setFormState(s => ({ ...s, name: e.target.value }))}
                   className="w-full bg-gray-200 text-[#2B3437] rounded-lg p-4 outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="John Doe"
+                  placeholder={t.namePlaceholder}
                   type="text"
                   required
                 />
@@ -126,13 +127,13 @@ export default function FormSection() {
 
               {/* EMAIL */}
               <div>
-                <label className="block text-sm font-semibold text-secondary mb-2">Email</label>
+                <label className="block text-sm font-semibold text-secondary mb-2">{t.emailLabel}</label>
                 <input
                   name="email"
                   value={formState.email}
                   onChange={e => setFormState(s => ({ ...s, email: e.target.value }))}
                   className="w-full bg-gray-200 text-[#2B3437] rounded-lg p-4 outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="john@example.com"
+                  placeholder={t.emailPlaceholder}
                   type="email"
                   required
                 />
@@ -140,13 +141,13 @@ export default function FormSection() {
 
               {/* MESSAGE */}
               <div>
-                <label className="block text-sm font-semibold text-secondary mb-2">Proposal Overview</label>
+                <label className="block text-sm font-semibold text-secondary mb-2">{t.messageLabel}</label>
                 <textarea
                   name="message"
                   value={formState.message}
                   onChange={e => setFormState(s => ({ ...s, message: e.target.value }))}
                   className="w-full bg-gray-200 text-[#2B3437] rounded-lg p-4 outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Describe your proposal..."
+                  placeholder={t.messagePlaceholder}
                   rows={4}
                   required
                 />
@@ -158,11 +159,11 @@ export default function FormSection() {
                 disabled={loading || !isFormValid}
                 className="w-full bg-primary text-on-primary py-4 rounded-lg font-bold transition-all hover:bg-primary/90 hover:scale-[1.02] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
               >
-                {loading ? 'Sending...' : 'Send Message'}
+                {loading ? t.sending : t.send}
               </button>
 
               {/* ERROR */}
-              {status === 'error' && <p className="text-red-600 text-sm">Something went wrong. Please try again later.</p>}
+              {status === 'error' && <p className="text-red-600 text-sm">{t.error}</p>}
             </form>
 
             {/* ANIMATION */}

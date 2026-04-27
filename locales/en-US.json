@@ -1,0 +1,162 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "work": "Work",
+    "feedback": "Feedback",
+    "journal": "Journal",
+    "getInTouch": "Get In Touch"
+  },
+  "hero": {
+    "role": "Senior FullStack Engineer",
+    "line1": "Turning ideas",
+    "line2": "into scalable",
+    "line3": "digital products.",
+    "description": "Focused on high-performance systems, clean architecture, and real-world impact using .NET, React, and cloud-native technologies.",
+    "viewProjects": "View Projects",
+    "readFeedback": "Read Feedback"
+  },
+  "work": {
+    "eyebrow": "Professional Journey",
+    "title": "Expertise forged in the industry.",
+    "subtitle": "Over 5 years of experience, from junior to tech lead, delivering production-grade systems across web and cloud.",
+    "downloadResume": "Download Resume",
+    "resumeSize": "PDF, 146 KB",
+    "items": [
+      {
+        "title": "Senior Full Stack Developer",
+        "company": "Sonae — SC Fitness",
+        "place": "Maia, PT",
+        "period": "2026 — Present",
+        "description": "Leading the development and evolution of SC Fitness' digital ecosystem, including two mobile applications serving 150k+ users, alongside public websites and shared backend systems. Responsible for architecture, feature delivery, and ensuring performance, scalability, and reliability across all platforms."
+      },
+      {
+        "title": "Tech Lead",
+        "company": "Axians",
+        "place": "Lisboa, PT",
+        "period": "2025 — 2026",
+        "description": "Led development of a large-scale platform for the Portuguese Ministry of Justice. Designed microservices-based APIs, managed complex CI/CD pipelines, and acted as the main technical point of contact for stakeholders. Guided the team on architecture, delivery, and engineering best practices."
+      },
+      {
+        "title": "Full Stack Developer",
+        "company": "Noesis",
+        "place": "Matosinhos, PT",
+        "period": "2023 — 2025",
+        "description": "Developed and maintained multiple full stack applications across various clients, contributing to both frontend and backend architecture. Mentored junior developers, improved development standards, and led delivery of a full stack portal for the Autoridade da Concorrência."
+      },
+      {
+        "title": "Junior Full Stack Developer",
+        "company": "Noesis",
+        "place": "Matosinhos, PT",
+        "period": "2021 — 2023",
+        "description": "Contributed to several React and .NET applications, collaborating with senior engineers to build and maintain production systems. Led development of an internal issue-tracking tool that significantly improved team efficiency and revenue."
+      },
+      {
+        "title": "Frontend Developer Intern",
+        "company": "GECAD",
+        "place": "Porto, PT",
+        "period": "2021 — 2021",
+        "description": "Developed a smart building management portal using Vue.js, enabling real-time device monitoring and control. Implemented alert systems using MQTT and worked directly with clients in an agile environment."
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Selected Projects",
+    "title": "What I've been working on",
+    "subtitle": "Built with scalability, performance, and production reliability in mind.",
+    "viewAll": "View all projects →",
+    "comingSoon": "Coming soon",
+    "empty": "No projects published yet. Check back soon."
+  },
+  "projectListing": {
+    "eyebrow": "Selected Projects",
+    "title": "All Projects",
+    "countSingular": "{count} project published",
+    "countPlural": "{count} projects published",
+    "searchPlaceholder": "Search projects...",
+    "sortNewest": "Newest first",
+    "sortOldest": "Oldest first",
+    "sortAZ": "A → Z",
+    "sortZA": "Z → A",
+    "resultsSingular": "{count} result found",
+    "resultsPlural": "{count} results found",
+    "empty": "No projects found",
+    "emptyHint": "Try adjusting your search or filters.",
+    "prev": "← Prev",
+    "next": "Next →",
+    "noImage": "No cover image",
+    "categoryAll": "All"
+  },
+  "blog": {
+    "eyebrow": "Insights & Perspectives",
+    "title": "The Curated Journal",
+    "subtitle": "Explore my latest thoughts and insights on design, technology, and business.",
+    "viewAll": "View all posts →",
+    "empty": "No articles published yet. Check back soon."
+  },
+  "blogListing": {
+    "eyebrow": "Insights & Perspectives",
+    "title": "The Curated Journal",
+    "countSingular": "{count} article published",
+    "countPlural": "{count} articles published",
+    "searchPlaceholder": "Search articles...",
+    "sortNewest": "Newest first",
+    "sortOldest": "Oldest first",
+    "sortShortest": "Shortest read",
+    "sortLongest": "Longest read",
+    "resultsSingular": "{count} result found",
+    "resultsPlural": "{count} results found",
+    "empty": "No articles found",
+    "emptyHint": "Try adjusting your search or filters.",
+    "prev": "← Prev",
+    "next": "Next →",
+    "noImage": "No cover image"
+  },
+  "feedback": {
+    "eyebrow": "Feedback",
+    "title": "Voices of Trust",
+    "items": [
+      {
+        "quote": "Paulo is someone you can trust to build scalable, reliable systems. His architectural decisions are well thought out and consistently facilitate my work, especially when integrating AI solutions. I've known him for a long time and have always appreciated how open he is to discussing ideas. He's someone I can rely on whenever I need to think through technical challenges. He truly cares about what he does and takes pride in delivering high-quality, well-crafted solutions.",
+        "name": "José Araújo",
+        "role": "AI Engineer"
+      },
+      {
+        "quote": "Working with Paulo on Vellonti's e-commerce website was a very smooth experience. As a founder without a deep technical background, I often had complex ideas around the product and user experience that weren't always easy to translate into technical requirements. Paulo had a real ability to break those concepts down into clear, practical solutions and guide the implementation in a way that made everything easy to understand and iterate on.",
+        "name": "Simão Carvalho",
+        "role": "Founder, Vellonti"
+      },
+      {
+        "quote": "Paulo and I met back in college, and later we ended up working together at Noesis. We've been in the same professional journey since then, growing side by side as Full Stack Developers. Throughout that time, I've always found him easy to work with, he has a structured way of thinking, makes solid technical decisions, and communicates in a very clear and practical way.",
+        "name": "Gonçalo Pinto",
+        "role": "Tech Lead"
+      }
+    ]
+  },
+  "form": {
+    "title": "Let's build something that scales",
+    "subtitle": "From idea to production, I help design and build scalable, high-performance systems.",
+    "location": "Porto, Portugal • Luxembourg • Remote",
+    "nameLabel": "Name",
+    "namePlaceholder": "John Doe",
+    "emailLabel": "Email",
+    "emailPlaceholder": "john@example.com",
+    "messageLabel": "Proposal Overview",
+    "messagePlaceholder": "Describe your proposal...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "successTitle": "Message sent!",
+    "successSubtitle": "I'll get back to you soon",
+    "error": "Something went wrong. Please try again later."
+  },
+  "footer": {
+    "copyright": "© 2026 Paulo Silva. All rights reserved."
+  },
+  "blogPost": {
+    "backToJournal": "Back to Journal"
+  },
+  "projectPost": {
+    "backToProjects": "Back to Projects",
+    "viewOnGithub": "View on GitHub",
+    "viewLive": "View Live"
+  }
+}

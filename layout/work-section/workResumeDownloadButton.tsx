@@ -3,7 +3,12 @@
 import { Download } from 'lucide-react';
 import { useState } from 'react';
 
-export default function WorkResumeDownloadButton() {
+interface Props {
+  downloadLabel: string;
+  sizeLabel: string;
+}
+
+export default function WorkResumeDownloadButton({ downloadLabel, sizeLabel }: Props) {
   const [hovered, setHovered] = useState(false);
 
   function handleResumeDownload() {
@@ -37,8 +42,8 @@ export default function WorkResumeDownloadButton() {
           <Download className={hovered ? 'icon-bounce' : ''} />
         </div>
         <div>
-          <p className="font-bold text-sm text-[#2B3437]">Download Resume</p>
-          <p className="text-xs text-on-surface-variant text-gray-600">PDF, 146 KB</p>
+          <p className="font-bold text-sm text-[#2B3437]">{downloadLabel}</p>
+          <p className="text-xs text-on-surface-variant text-gray-600">{sizeLabel}</p>
         </div>
       </div>
     </>

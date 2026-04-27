@@ -3,19 +3,13 @@
 import BlogPost from '@/models/blogPost';
 import { CategoryOption } from '@/lib/supabase/queries/categories';
 import CustomSelect from '@/components/customSelect';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import BlogListingItem from './BlogListingItem';
+import type { Translations } from '@/lib/i18n';
+import { tr } from '@/lib/i18n';
 
 type SortOrder = 'newest' | 'oldest' | 'shortest' | 'longest';
-
-const SORT_OPTIONS: { value: SortOrder; label: string }[] = [
-  { value: 'newest', label: 'Newest first' },
-  { value: 'oldest', label: 'Oldest first' },
-  { value: 'shortest', label: 'Shortest read' },
-  { value: 'longest', label: 'Longest read' },
-];
 
 interface Props {
   posts: BlogPost[];
@@ -26,6 +20,7 @@ interface Props {
   currentSearch: string;
   currentCategory: string;
   currentSort: string;
+  t: Translations['blogListing'];
 }
 
 export default function BlogListingClient({
@@ -37,10 +32,18 @@ export default function BlogListingClient({
   currentSearch,
   currentCategory,
   currentSort,
+  t,
 }: Props) {
   const router = useRouter();
   const [search, setSearch] = useState(currentSearch);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const SORT_OPTIONS: { value: SortOrder; label: string }[] = [
+    { value: 'newest',   label: t.sortNewest },
+    { value: 'oldest',   label: t.sortOldest },
+    { value: 'shortest', label: t.sortShortest },
+    { value: 'longest',  label: t.sortLongest },
+  ];
 
   useEffect(() => {
     setSearch(currentSearch);
@@ -84,10 +87,12 @@ export default function BlogListingClient({
     <div className="w-full md:max-w-7xl mx-auto">
       {/* HEADER */}
       <div className="mb-10 hero-animate" style={{ animationDelay: '0ms' }}>
-        <h2 className="text-primary font-semibold uppercase tracking-wide">Insights & Perspectives</h2>
-        <h1 className="text-3xl md:text-5xl font-bold text-[#2B3437] mt-1">The Curated Journal</h1>
+        <h2 className="text-primary font-semibold uppercase tracking-wide">{t.eyebrow}</h2>
+        <h1 className="text-3xl md:text-5xl font-bold text-[#2B3437] mt-1">{t.title}</h1>
         <p className="text-[#5A677A] mt-3">
-          {total} {total === 1 ? 'article' : 'articles'} published
+          {total === 1
+            ? tr(t.countSingular, { count: total })
+            : tr(t.countPlural, { count: total })}
         </p>
       </div>
 
@@ -105,14 +110,14 @@ export default function BlogListingClient({
           </svg>
           <input
             type="text"
-            placeholder="Search articles..."
+            placeholder={t.searchPlaceholder}
             value={search}
             onChange={e => handleSearchChange(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white border border-gray-200 text-[#2B3437] placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
           />
         </div>
         <CustomSelect
-          value={currentSort as 'newest' | 'oldest' | 'shortest' | 'longest'}
+          value={currentSort as SortOrder}
           options={SORT_OPTIONS}
           onChange={val => navigate({ sort: val, page: 1 })}
         />
@@ -132,7 +137,7 @@ export default function BlogListingClient({
                 : 'bg-white text-[#3F555D] border border-gray-200 hover:border-primary hover:text-primary'
             }`}
           >
-            All
+            {t.categoryAll}
           </button>
           {categories.map(cat => (
             <button
@@ -153,20 +158,22 @@ export default function BlogListingClient({
       {/* RESULTS INFO */}
       {(currentSearch || currentCategory) && (
         <p className="text-sm text-secondary mb-6 hero-animate" style={{ animationDelay: '280ms' }}>
-          {total} {total === 1 ? 'result' : 'results'} found
+          {total === 1
+            ? tr(t.resultsSingular, { count: total })
+            : tr(t.resultsPlural, { count: total })}
         </p>
       )}
 
       {/* GRID — key changes on every fetch so cards re-animate */}
       {posts.length === 0 ? (
         <div className="text-center py-24 text-secondary hero-animate" style={{ animationDelay: '300ms' }}>
-          <p className="text-lg font-semibold">No articles found</p>
-          <p className="text-sm mt-1">Try adjusting your search or filters.</p>
+          <p className="text-lg font-semibold">{t.empty}</p>
+          <p className="text-sm mt-1">{t.emptyHint}</p>
         </div>
       ) : (
         <div key={gridKey} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post, index) => (
-            <BlogListingItem post={post} key={post.id} index={index} />
+            <BlogListingItem post={post} key={post.id} index={index} noImageLabel={t.noImage} />
           ))}
         </div>
       )}
@@ -179,7 +186,7 @@ export default function BlogListingClient({
             disabled={currentPage === 1}
             className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-[#3F555D] hover:border-primary hover:text-primary hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
           >
-            ← Prev
+            {t.prev}
           </button>
 
           {getPageNumbers().map((p, i) =>
@@ -207,7 +214,7 @@ export default function BlogListingClient({
             disabled={currentPage === totalPages}
             className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-[#3F555D] hover:border-primary hover:text-primary hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
           >
-            Next →
+            {t.next}
           </button>
         </div>
       )}

@@ -2,10 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useRouter } from 'next/navigation';
-import { LANGUAGE_COOKIE, SiteLanguage } from '@/lib/language';
-
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
+import { usePathname, useRouter } from 'next/navigation';
+import { SiteLanguage, LOCALE_TO_LANGUAGE } from '@/lib/language';
 
 function FlagUS({ className }: { className?: string }) {
   return (
@@ -34,18 +32,26 @@ function FlagPT({ className }: { className?: string }) {
   );
 }
 
-const LANGUAGES: { value: SiteLanguage; Flag: typeof FlagUS; label: string; short: string }[] = [
-  { value: 'en-US', Flag: FlagUS, label: 'English',    short: 'EN' },
-  { value: 'pt-PT', Flag: FlagPT, label: 'Português',  short: 'PT' },
+const LANGUAGES: { locale: string; language: SiteLanguage; Flag: typeof FlagUS; label: string; short: string }[] = [
+  { locale: 'en', language: 'en-US', Flag: FlagUS, label: 'English',   short: 'EN' },
+  { locale: 'pt', language: 'pt-PT', Flag: FlagPT, label: 'Português', short: 'PT' },
 ];
 
 export default function LanguageSwitcher({ current }: { current: SiteLanguage }) {
+  const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [dropdownPos, setDropdownPos] = useState({ top: 0, left: 0, width: 0 });
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const currentLang = LANGUAGES.find(l => l.value === current) ?? LANGUAGES[0];
+  const currentLang = LANGUAGES.find(l => l.language === current) ?? LANGUAGES[0];
+
+  function getLocaleUrl(targetLocale: string): string {
+    // Replace the first path segment (/en/... or /pt/...) with the new locale
+    const segments = pathname.split('/');
+    segments[1] = targetLocale;
+    return segments.join('/') || `/${targetLocale}`;
+  }
 
   function handleOpen() {
     if (triggerRef.current) {
@@ -59,10 +65,9 @@ export default function LanguageSwitcher({ current }: { current: SiteLanguage })
     setOpen(o => !o);
   }
 
-  function setLanguage(lang: SiteLanguage) {
-    document.cookie = `${LANGUAGE_COOKIE}=${lang}; path=/; max-age=${COOKIE_MAX_AGE}; SameSite=Lax`;
+  function switchLocale(targetLocale: string) {
     setOpen(false);
-    router.refresh();
+    router.push(getLocaleUrl(targetLocale));
   }
 
   useEffect(() => {
@@ -85,14 +90,14 @@ export default function LanguageSwitcher({ current }: { current: SiteLanguage })
       style={{ position: 'absolute', top: dropdownPos.top, left: dropdownPos.left, minWidth: dropdownPos.width, zIndex: 9999 }}
       className="bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden"
     >
-      {LANGUAGES.map(({ value, Flag, label }) => {
-        const isSelected = value === current;
+      {LANGUAGES.map(({ locale, language, Flag, label }) => {
+        const isSelected = language === current;
         return (
           <button
-            key={value}
+            key={locale}
             type="button"
             onMouseDown={e => e.stopPropagation()}
-            onClick={() => setLanguage(value)}
+            onClick={() => switchLocale(locale)}
             className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium transition-colors duration-150 ${
               isSelected ? 'bg-primary text-white' : 'text-[#2B3437] hover:bg-accent hover:text-primary'
             }`}

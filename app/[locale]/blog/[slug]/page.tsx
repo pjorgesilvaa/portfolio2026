@@ -1,38 +1,52 @@
 import { getArticleBySlug } from '@/lib/supabase/queries/articles';
-import { getLanguage } from '@/lib/language.server';
+import { getLanguage, getLocale } from '@/lib/language.server';
+import { getT } from '@/lib/i18n.server';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { LOCALE_TO_HREFLANG } from '@/lib/language';
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://paulosilva.com';
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const language = await getLanguage();
   const post = await getArticleBySlug(slug, language);
   if (!post) return {};
+
   return {
-    title: `${post.metaTitle} | Paulo Silva` || `${post.title} | Paulo Silva`,
+    title: post.metaTitle || post.title,
     description: post.metaDescription || post.excerpt,
     openGraph: {
-      title: `${post.metaTitle} | Paulo Silva` || `${post.title} | Paulo Silva`,
+      title: post.metaTitle || post.title,
       description: post.metaDescription || post.excerpt,
       images: post.ogImageUrl ? [post.ogImageUrl] : [],
     },
-    robots: post.isIndexed || post.status !== 'published' ? 'index, follow' : 'noindex, nofollow',
+    robots: post.isIndexed && post.status === 'published' ? 'index, follow' : 'noindex, nofollow',
+    alternates: {
+      canonical: `${BASE_URL}/${locale}/blog/${slug}`,
+      languages: {
+        [LOCALE_TO_HREFLANG[locale as keyof typeof LOCALE_TO_HREFLANG] ?? 'en-US']:
+          `${BASE_URL}/${locale}/blog/${slug}`,
+        'x-default': `${BASE_URL}/en/blog`,
+      },
+    },
   };
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
-  const language = await getLanguage();
+  const { locale, slug } = await params;
+  const [language, t] = await Promise.all([getLanguage(), getT()]);
   const post = await getArticleBySlug(slug, language);
 
   if (!post) notFound();
 
-  const formattedDate = Intl.DateTimeFormat('pt-PT', {
+  const dateLocale = locale === 'pt' ? 'pt-PT' : 'en-US';
+  const formattedDate = Intl.DateTimeFormat(dateLocale, {
     month: 'long',
     day: '2-digit',
     year: 'numeric',
@@ -43,14 +57,14 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="w-full max-w-3xl mx-auto">
         {/* BACK */}
         <Link
-          href="/blog"
+          href={`/${locale}/blog`}
           className="hero-animate inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-70 transition-opacity duration-200 mb-8"
           style={{ animationDelay: '0ms' }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          Back to Journal
+          {t.blogPost.backToJournal}
         </Link>
 
         {/* CATEGORY */}

@@ -5,15 +5,10 @@ import CustomSelect from '@/components/customSelect';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import type { Translations } from '@/lib/i18n';
+import { tr } from '@/lib/i18n';
 
 type SortOrder = 'newest' | 'oldest' | 'a-z' | 'z-a';
-
-const SORT_OPTIONS: { value: SortOrder; label: string }[] = [
-  { value: 'newest', label: 'Newest first' },
-  { value: 'oldest', label: 'Oldest first' },
-  { value: 'a-z',    label: 'A → Z' },
-  { value: 'z-a',    label: 'Z → A' },
-];
 
 interface Props {
   projects: Project[];
@@ -22,6 +17,7 @@ interface Props {
   currentPage: number;
   currentSearch: string;
   currentSort: string;
+  t: Translations['projectListing'];
 }
 
 export default function ProjectListingClient({
@@ -31,10 +27,18 @@ export default function ProjectListingClient({
   currentPage,
   currentSearch,
   currentSort,
+  t,
 }: Props) {
   const router = useRouter();
   const [search, setSearch] = useState(currentSearch);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const SORT_OPTIONS: { value: SortOrder; label: string }[] = [
+    { value: 'newest', label: t.sortNewest },
+    { value: 'oldest', label: t.sortOldest },
+    { value: 'a-z',    label: t.sortAZ },
+    { value: 'z-a',    label: t.sortZA },
+  ];
 
   useEffect(() => { setSearch(currentSearch); }, [currentSearch]);
 
@@ -74,9 +78,13 @@ export default function ProjectListingClient({
 
       {/* HEADER */}
       <div className="mb-10 hero-animate" style={{ animationDelay: '0ms' }}>
-        <h2 className="text-primary font-semibold uppercase tracking-wide">Selected Projects</h2>
-        <h1 className="text-3xl md:text-5xl font-bold text-[#2B3437] mt-1">All Projects</h1>
-        <p className="text-[#5A677A] mt-3">{total} {total === 1 ? 'project' : 'projects'} published</p>
+        <h2 className="text-primary font-semibold uppercase tracking-wide">{t.eyebrow}</h2>
+        <h1 className="text-3xl md:text-5xl font-bold text-[#2B3437] mt-1">{t.title}</h1>
+        <p className="text-[#5A677A] mt-3">
+          {total === 1
+            ? tr(t.countSingular, { count: total })
+            : tr(t.countPlural, { count: total })}
+        </p>
       </div>
 
       {/* CONTROLS */}
@@ -88,7 +96,7 @@ export default function ProjectListingClient({
           </svg>
           <input
             type="text"
-            placeholder="Search projects..."
+            placeholder={t.searchPlaceholder}
             value={search}
             onChange={e => handleSearchChange(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white border border-gray-200 text-[#2B3437] placeholder-gray-400 outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
@@ -104,15 +112,17 @@ export default function ProjectListingClient({
       {/* RESULTS INFO */}
       {currentSearch && (
         <p className="text-sm text-secondary mb-6 hero-animate" style={{ animationDelay: '200ms' }}>
-          {total} {total === 1 ? 'result' : 'results'} found
+          {total === 1
+            ? tr(t.resultsSingular, { count: total })
+            : tr(t.resultsPlural, { count: total })}
         </p>
       )}
 
       {/* GRID */}
       {projects.length === 0 ? (
         <div className="text-center py-24 text-secondary hero-animate" style={{ animationDelay: '300ms' }}>
-          <p className="text-lg font-semibold">No projects found</p>
-          <p className="text-sm mt-1">Try adjusting your search or filters.</p>
+          <p className="text-lg font-semibold">{t.empty}</p>
+          <p className="text-sm mt-1">{t.emptyHint}</p>
         </div>
       ) : (
         <div key={gridKey} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -135,7 +145,7 @@ export default function ProjectListingClient({
                     />
                   ) : (
                     <div className="w-full h-48 bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
-                      <span className="text-gray-400 text-sm">No cover image</span>
+                      <span className="text-gray-400 text-sm">{t.noImage}</span>
                     </div>
                   )}
                 </div>
@@ -174,7 +184,7 @@ export default function ProjectListingClient({
             disabled={currentPage === 1}
             className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-[#3F555D] hover:border-primary hover:text-primary hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
           >
-            ← Prev
+            {t.prev}
           </button>
 
           {getPageNumbers().map((p, i) =>
@@ -200,7 +210,7 @@ export default function ProjectListingClient({
             disabled={currentPage === totalPages}
             className="px-4 py-2 rounded-lg border border-gray-200 text-sm font-semibold text-[#3F555D] hover:border-primary hover:text-primary hover:scale-105 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-200"
           >
-            Next →
+            {t.next}
           </button>
         </div>
       )}

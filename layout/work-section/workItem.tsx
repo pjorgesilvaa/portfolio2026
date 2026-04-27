@@ -1,11 +1,10 @@
 import { Badge } from "@/components/ui/badge";
-import { ReactNode } from "react";
 
 export default function WorkItem({
   item,
   isCurrent,
 }: {
-  item: { title: string; company: string; place: string; period: string; description: ReactNode };
+  item: { title: string; company: string; place: string; period: string; description: string };
   isCurrent: boolean;
 }) {
   return (

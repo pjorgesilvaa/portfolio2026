@@ -2,6 +2,7 @@ import BlogListingClient from '@/layout/blog-listing/BlogListingClient';
 import { ARTICLES_PER_PAGE, getArticlesWithFilters } from '@/lib/supabase/queries/articles';
 import { getCategories } from '@/lib/supabase/queries/categories';
 import { getLanguage } from '@/lib/language.server';
+import { getT } from '@/lib/i18n.server';
 
 interface Props {
   searchParams: Promise<{
@@ -19,13 +20,14 @@ export default async function BlogPage({ searchParams }: Props) {
   const search     = params.search ?? '';
   const categoryId = params.category ?? '';
   const sort       = params.sort ?? 'newest';
-  const language   = await getLanguage();
 
-  const [{ posts, total }, categories] = await Promise.all([
-    getArticlesWithFilters({ page, search, categoryId, sort, language }),
+  const [language, t, categories] = await Promise.all([
+    getLanguage(),
+    getT(),
     getCategories(),
   ]);
 
+  const { posts, total } = await getArticlesWithFilters({ page, search, categoryId, sort, language });
   const totalPages = Math.ceil(total / ARTICLES_PER_PAGE);
 
   return (
@@ -39,6 +41,7 @@ export default async function BlogPage({ searchParams }: Props) {
         currentSearch={search}
         currentCategory={categoryId}
         currentSort={sort}
+        t={t.blogListing}
       />
     </div>
   );

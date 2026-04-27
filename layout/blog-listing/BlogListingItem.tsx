@@ -1,6 +1,15 @@
 import Link from 'next/link';
 
-export default function BlogListingItem({ post, index }: { post: any; index: number }) {
+export default function BlogListingItem({
+  post,
+  index,
+  noImageLabel = 'No cover image',
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  post: any;
+  index: number;
+  noImageLabel?: string;
+}) {
   return (
     <Link
       href={`/blog/${post.slug}`}
@@ -18,7 +27,7 @@ export default function BlogListingItem({ post, index }: { post: any; index: num
             />
           ) : (
             <div className="w-full h-48 bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
-              <span className="text-gray-400 text-sm">No cover image</span>
+              <span className="text-gray-400 text-sm">{noImageLabel}</span>
             </div>
           )}
           {post.category?.name && (

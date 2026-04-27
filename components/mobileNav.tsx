@@ -5,16 +5,26 @@ import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import LanguageSwitcher from './languageSwitcher';
 import { SiteLanguage } from '@/lib/language';
+import type { Translations } from '@/lib/i18n';
 
-const NAV_LINKS = [
-  { href: '/#projects', label: 'Projects' },
-  { href: '/#work',     label: 'Work' },
-  { href: '/#feedback', label: 'Feedback' },
-  { href: '/#journal',  label: 'Journal' },
+const NAV_KEYS: { key: keyof Translations['nav']; anchor: string }[] = [
+  { key: 'projects', anchor: '#projects' },
+  { key: 'work',     anchor: '#work' },
+  { key: 'feedback', anchor: '#feedback' },
+  { key: 'journal',  anchor: '#journal' },
 ];
 
-export default function MobileNav({ language }: { language: SiteLanguage }) {
+export default function MobileNav({
+  language,
+  locale,
+  nav,
+}: {
+  language: SiteLanguage;
+  locale: string;
+  nav: Translations['nav'];
+}) {
   const [open, setOpen] = useState(false);
+  const home = `/${locale}`;
 
   return (
     <>
@@ -51,25 +61,25 @@ export default function MobileNav({ language }: { language: SiteLanguage }) {
           <div className="px-8 pt-6 pb-4 flex items-center justify-between border-b border-gray-100">
             <LanguageSwitcher current={language} />
             <Link
-              href="/#form"
+              href={`${home}#form`}
               onClick={() => setOpen(false)}
               className="inline-flex items-center justify-center rounded-md bg-primary text-white text-sm font-semibold px-6 h-10 hover:bg-primary/90 transition-all duration-200"
             >
-              Get In Touch
+              {nav.getInTouch}
             </Link>
           </div>
 
           {/* Nav links — only this section scrolls */}
           <nav className="flex flex-col flex-1 overflow-y-auto justify-center px-8 gap-2">
-            {NAV_LINKS.map((link, i) => (
+            {NAV_KEYS.map((link, i) => (
               <Link
-                key={link.href}
-                href={link.href}
+                key={link.key}
+                href={`${home}${link.anchor}`}
                 onClick={() => setOpen(false)}
                 className="text-4xl font-bold text-[#2B3437] py-3 border-b border-gray-100 hover:text-primary transition-colors duration-200"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
-                {link.label}
+                {nav[link.key]}
               </Link>
             ))}
           </nav>

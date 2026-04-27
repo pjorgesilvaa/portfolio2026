@@ -1,7 +1,7 @@
-import FooterSection from '@/layout/footer-section/FooterSection';
 import Header from '@/layout/header/header';
+import FooterSection from '@/layout/footer-section/FooterSection';
 
-export default function BlogLayout({ children }: { children: React.ReactNode }) {
+export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
