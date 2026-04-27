@@ -34,15 +34,16 @@ export default function CustomSelect<T extends string>({ value, options, onChang
 
   useEffect(() => {
     if (!open) return;
-    function close(e: MouseEvent) {
+    function closeOnMouse(e: MouseEvent) {
       if (triggerRef.current?.contains(e.target as Node)) return;
       setOpen(false);
     }
-    document.addEventListener('mousedown', close);
-    window.addEventListener('scroll', close, true);
+    function closeOnScroll() { setOpen(false); }
+    document.addEventListener('mousedown', closeOnMouse);
+    window.addEventListener('scroll', closeOnScroll, true);
     return () => {
-      document.removeEventListener('mousedown', close);
-      window.removeEventListener('scroll', close, true);
+      document.removeEventListener('mousedown', closeOnMouse);
+      window.removeEventListener('scroll', closeOnScroll, true);
     };
   }, [open]);
 
