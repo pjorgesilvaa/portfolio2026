@@ -175,7 +175,7 @@ export default function BlogListingClient({
       ) : (
         <div key={gridKey} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post, index) => (
-            <BlogListingItem post={post} key={post.id} index={index} locale={locale} noImageLabel={t.noImage} />
+            <BlogListingItem post={post} key={post.id} index={index} locale={locale} noImageLabel={t.noImage} minReadLabel={t.minRead} />
           ))}
         </div>
       )}

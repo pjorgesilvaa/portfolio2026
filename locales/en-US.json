@@ -109,7 +109,8 @@
     "emptyHint": "Try adjusting your search or filters.",
     "prev": "← Prev",
     "next": "Next →",
-    "noImage": "No cover image"
+    "noImage": "No cover image",
+    "minRead": "{count} min read"
   },
   "feedback": {
     "eyebrow": "Feedback",

@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: Props) {
             <p className="text-primary font-bold mb-0!">{post.author.name}</p>
             <p className="text-secondary text-sm mb-0!">
               {formattedDate}
-              {post.readingTimeMinutes > 0 && ` · ${post.readingTimeMinutes} min read`}
+              {post.readingTimeMinutes > 0 && ` · ${t.blogListing.minRead.replace('{count}', String(post.readingTimeMinutes))}`}
             </p>
           </div>
         </div>

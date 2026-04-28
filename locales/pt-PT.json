@@ -109,7 +109,8 @@
     "emptyHint": "Tente ajustar a sua pesquisa ou filtros.",
     "prev": "← Anterior",
     "next": "Seguinte →",
-    "noImage": "Sem imagem de capa"
+    "noImage": "Sem imagem de capa",
+    "minRead": "{count} min de leitura"
   },
   "feedback": {
     "eyebrow": "Feedback",

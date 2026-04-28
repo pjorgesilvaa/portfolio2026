@@ -8,7 +8,7 @@ export default async function FooterSection() {
   return (
     <div className="w-full md:w-7xl m-auto flex flex-col md:flex-row justify-between items-center md:px-8 md:py-8 gap-4 md:gap-0">
       <div></div>
-      <p className="text-secondary text-sm">{t.footer.copyright}</p>
+      <p className="text-secondary text-sm text-center">{t.footer.copyright}</p>
       <div className="flex justify-between items-center gap-8">
         <Link
           href="https://www.linkedin.com/in/paulo-silva171"

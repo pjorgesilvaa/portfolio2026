@@ -51,7 +51,7 @@ export default async function ProjectSection() {
           // Empty slot
           if (!project) {
             return (
-              <div key={`empty-${index}`} className={`${span} hero-animate`} style={delay}>
+              <div key={`empty-${index}`} className={`hidden md:block ${span} hero-animate`} style={delay}>
                 <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full">
                   <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
                     <span className="text-gray-400 text-sm">{t.projects.comingSoon}</span>

@@ -5,12 +5,14 @@ export default function BlogListingItem({
   index,
   locale,
   noImageLabel = 'No cover image',
+  minReadLabel = '{count} min read',
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post: any;
   index: number;
   locale: string;
   noImageLabel?: string;
+  minReadLabel?: string;
 }) {
   return (
     <Link
@@ -55,8 +57,8 @@ export default function BlogListingItem({
             <div>
               <p className="text-primary text-sm font-bold">{post.author.name}</p>
               <p className="text-secondary text-xs">
-                {Intl.DateTimeFormat('pt-PT', { month: 'short', day: '2-digit', year: 'numeric' }).format(post.publishedAt)}
-                {post.readingTimeMinutes > 0 && ` · ${post.readingTimeMinutes} min read`}
+                {Intl.DateTimeFormat(locale === 'pt' ? 'pt-PT' : 'en-US', { month: 'short', day: '2-digit', year: 'numeric' }).format(post.publishedAt)}
+                {post.readingTimeMinutes > 0 && ` · ${minReadLabel.replace('{count}', String(post.readingTimeMinutes))}`}
               </p>
             </div>
           </div>
