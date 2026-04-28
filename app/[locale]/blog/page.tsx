@@ -21,11 +21,8 @@ export default async function BlogPage({ searchParams }: Props) {
   const categoryId = params.category ?? '';
   const sort       = params.sort ?? 'newest';
 
-  const [language, t, categories] = await Promise.all([
-    getLanguage(),
-    getT(),
-    getCategories(),
-  ]);
+  const [language, t] = await Promise.all([getLanguage(), getT()]);
+  const categories = await getCategories(language);
 
   const { posts, total } = await getArticlesWithFilters({ page, search, categoryId, sort, language });
   const totalPages = Math.ceil(total / ARTICLES_PER_PAGE);
