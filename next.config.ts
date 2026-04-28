@@ -7,14 +7,14 @@ const CSP = [
   "default-src 'self'",
   // Next.js hydration + GTM/Clarity both require unsafe-inline.
   // GTM in particular injects arbitrary inline scripts by design.
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms",
   // Tailwind / next/font inject inline styles
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   // Images come from same-origin (/img/ rewrite); data: covers inline SVG
   "img-src 'self' data: blob:",
   // Outbound XHR/fetch: analytics beacons + Clarity telemetry
-  "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://www.clarity.ms",
+  "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://www.clarity.ms https://dc.services.visualstudio.com",
   // No frames, no plugins, no dynamic base URL
   "frame-ancestors 'none'",
   "frame-src 'none'",
