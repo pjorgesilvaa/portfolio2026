@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { trackEvent } from '@/lib/analytics';
 
 export default function BlogListingItem({
@@ -26,12 +27,14 @@ export default function BlogListingItem({
     >
       <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
         {/* COVER */}
-        <div className="relative overflow-hidden">
+        <div className="relative h-48 overflow-hidden">
           {post.coverImageUrl ? (
-            <img
+            <Image
               src={post.coverImageUrl}
               alt={post.title}
-              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
             <div className="w-full h-48 bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">
@@ -54,7 +57,7 @@ export default function BlogListingItem({
           <div className="h-px w-full bg-gray-100 mt-1" />
           <div className="flex items-center gap-3">
             {post.author.avatarUrl ? (
-              <img src={post.author.avatarUrl} alt={post.author.name} className="w-9 h-9 rounded-lg object-cover shrink-0" />
+              <Image src={post.author.avatarUrl} alt={post.author.name} width={36} height={36} className="rounded-lg object-cover shrink-0" />
             ) : (
               <div className="w-9 h-9 rounded-lg bg-gray-200 shrink-0" />
             )}

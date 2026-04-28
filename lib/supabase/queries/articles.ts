@@ -1,5 +1,6 @@
 import BlogPost from '@/models/blogPost';
 import { createServerSupabaseClient } from '../server';
+import { maskStorageUrl } from '../storageUrl';
 
 const SELECT_FIELDS = `
   id,
@@ -69,10 +70,10 @@ function mapRow(row: any): BlogPost {
     content: row.content ?? '',
     status: row.status,
     language: row.language ?? 'en-US',
-    coverImageUrl: row.cover_image_url ?? '',
+    coverImageUrl: maskStorageUrl(row.cover_image_url),
     metaTitle: row.meta_title ?? row.title,
     metaDescription: row.meta_description ?? '',
-    ogImageUrl: row.og_image_url ?? '',
+    ogImageUrl: maskStorageUrl(row.og_image_url),
     canonicalUrl: row.canonical_url ?? '',
     isIndexed: row.is_indexed ?? false,
     readingTimeMinutes: row.reading_time_minutes ?? 0,
@@ -87,7 +88,7 @@ function mapRow(row: any): BlogPost {
           id: author.id,
           name: author.name,
           email: author.email ?? '',
-          avatarUrl: author.avatar_url ?? '',
+          avatarUrl: maskStorageUrl(author.avatar_url),
           bio: author.bio ?? '',
           createdAt: new Date(author.created_at),
           updatedAt: new Date(author.updated_at),

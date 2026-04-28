@@ -3,6 +3,7 @@ import { getLanguage, getLocale } from '@/lib/language.server';
 import { getT } from '@/lib/i18n.server';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import { LOCALE_TO_HREFLANG } from '@/lib/language';
 
@@ -81,8 +82,8 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* COVER IMAGE */}
         {post.coverImageUrl && (
-          <div className="hero-animate mt-10 rounded-xl overflow-hidden shadow-md" style={{ animationDelay: '240ms' }}>
-            <img src={post.coverImageUrl} alt={post.title} className="w-full object-cover max-h-120" />
+          <div className="hero-animate relative w-full h-64 md:h-120 mt-10 rounded-xl overflow-hidden shadow-md" style={{ animationDelay: '240ms' }}>
+            <Image src={post.coverImageUrl} alt={post.title} fill priority sizes="(max-width: 768px) 100vw, 768px" className="object-cover" />
           </div>
         )}
 
@@ -96,7 +97,7 @@ export default async function BlogPostPage({ params }: Props) {
         {/* AUTHOR + META */}
         <div className="hero-animate flex items-center gap-4 mt-12 pt-8 border-t border-gray-200" style={{ animationDelay: '400ms' }}>
           {post.author.avatarUrl ? (
-            <img src={post.author.avatarUrl} alt={post.author.name} className="w-12 h-12 rounded-xl object-cover shrink-0 shadow-md" />
+            <Image src={post.author.avatarUrl} alt={post.author.name} width={48} height={48} className="rounded-xl object-cover shrink-0 shadow-md" />
           ) : (
             <div className="w-12 h-12 rounded-xl bg-gray-200 shrink-0" />
           )}

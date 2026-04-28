@@ -1,5 +1,6 @@
 import Project from '@/models/project';
 import { createServerSupabaseClient } from '../server';
+import { maskStorageUrl } from '../storageUrl';
 
 const SELECT_FIELDS = `
   id,
@@ -46,7 +47,7 @@ function mapRow(row: any): Project {
     excerpt: row.excerpt ?? '',
     description: row.description ?? '',
     tags,
-    bannerUrl: row.bannerUrl ?? '',
+    bannerUrl: maskStorageUrl(row.bannerUrl),
     projectGitUrl: row.project_git_url ?? null,
     projectDeployedUrl: row.project_deployed_url ?? null,
     language: row.language ?? 'en-US',

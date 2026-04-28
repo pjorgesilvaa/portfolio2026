@@ -3,6 +3,7 @@
 import Project from '@/models/project';
 import CustomSelect from '@/components/customSelect';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import type { Translations } from '@/lib/i18n';
@@ -140,12 +141,14 @@ export default function ProjectListingClient({
               <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
 
                 {/* COVER */}
-                <div className="relative overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
                   {project.bannerUrl ? (
-                    <img
+                    <Image
                       src={project.bannerUrl}
                       alt={project.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
                     <div className="w-full h-48 bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors duration-300">

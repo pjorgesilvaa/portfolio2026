@@ -1,7 +1,8 @@
 import AnimateIn from '@/components/animateIn';
 import { getT } from '@/lib/i18n.server';
+import Image from 'next/image';
 
-const avatars = ['images/jose.jpg', 'images/simao.jpg', 'images/goncalo.jpg'];
+const avatars = ['/images/jose.jpg', '/images/simao.jpg', '/images/goncalo.jpg'];
 const alts    = ['José Araújo', 'Simão Carvalho', 'Gonçalo Pinto'];
 
 export default async function FeedbackSection() {
@@ -25,10 +26,12 @@ export default async function FeedbackSection() {
             <div className="md:min-h-110 bg-white rounded-lg shadow-md overflow-hidden p-8 flex flex-col justify-between items-start gap-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
               <p className="text-secondary italic">&ldquo;{item.quote}&rdquo;</p>
               <div className="flex gap-4 md:gap-8 items-center">
-                <img
+                <Image
                   src={avatars[index]}
                   alt={alts[index]}
-                  className="aspect-square h-12 md:h-16 rounded-lg shrink-0 shadow-2xl"
+                  width={64}
+                  height={64}
+                  className="rounded-lg object-cover shrink-0 shadow-2xl"
                 />
                 <div>
                   <p className="text-[#2B3437] text-base md:text-xl font-bold">{item.name}</p>

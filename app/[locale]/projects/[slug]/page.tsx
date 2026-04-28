@@ -3,6 +3,7 @@ import { getLanguage } from '@/lib/language.server';
 import { getT } from '@/lib/i18n.server';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import { LOCALE_TO_HREFLANG } from '@/lib/language';
 import ProjectExternalLinks from '@/components/projectExternalLinks';
@@ -79,8 +80,8 @@ export default async function ProjectPage({ params }: Props) {
 
         {/* COVER IMAGE */}
         {project.bannerUrl && (
-          <div className="hero-animate mt-10 rounded-xl overflow-hidden shadow-md" style={{ animationDelay: '240ms' }}>
-            <img src={project.bannerUrl} alt={project.title} className="w-full object-cover max-h-120" />
+          <div className="hero-animate relative w-full h-64 md:h-120 mt-10 rounded-xl overflow-hidden shadow-md" style={{ animationDelay: '240ms' }}>
+            <Image src={project.bannerUrl} alt={project.title} fill priority sizes="(max-width: 768px) 100vw, 768px" className="object-cover" />
           </div>
         )}
 
