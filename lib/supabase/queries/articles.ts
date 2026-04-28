@@ -208,7 +208,6 @@ export async function getArticleBySlug(slug: string, language = 'en-US'): Promis
     .from('articles')
     .select(SELECT_FIELDS)
     .eq('slug', slug)
-    .eq('status', 'published')
     .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
     .eq('language', language)
     .single();
