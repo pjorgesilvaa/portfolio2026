@@ -110,7 +110,8 @@
     "prev": "← Anterior",
     "next": "Seguinte →",
     "noImage": "Sem imagem de capa",
-    "minRead": "{count} min de leitura"
+    "minRead": "{count} min de leitura",
+    "categoryAll": "Todas"
   },
   "feedback": {
     "eyebrow": "Feedback",

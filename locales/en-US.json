@@ -110,7 +110,8 @@
     "prev": "← Prev",
     "next": "Next →",
     "noImage": "No cover image",
-    "minRead": "{count} min read"
+    "minRead": "{count} min read",
+    "categoryAll": "All"
   },
   "feedback": {
     "eyebrow": "Feedback",
