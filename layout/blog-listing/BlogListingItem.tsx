@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { trackEvent } from '@/lib/analytics';
 
 export default function BlogListingItem({
   post,
@@ -19,6 +22,7 @@ export default function BlogListingItem({
       href={`/${locale}/blog/${post.slug}`}
       className="group block hero-animate"
       style={{ animationDelay: `${300 + index * 80}ms` }}
+      onClick={() => trackEvent({ event: 'blog_post_click', post_title: post.title, post_slug: post.slug })}
     >
       <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
         {/* COVER */}

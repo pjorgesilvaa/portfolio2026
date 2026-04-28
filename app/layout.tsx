@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { headers } from 'next/headers';
 import { LOCALE_TO_LANG_ATTR } from '@/lib/language';
+import Script from 'next/script';
 import './globals.css';
 
 const inter = Inter({
@@ -31,6 +32,15 @@ export default async function RootLayout({
     <html lang={lang} className="scroll-smooth scroll-pt-21">
       <GoogleAnalytics gaId="G-ZYPKYJVTQQ" />
       <GoogleTagManager gtmId="GTM-NSX6S6VJ" />
+      {process.env.NEXT_PUBLIC_CLARITY_ID && (
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`(function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window,document,"clarity","script","${process.env.NEXT_PUBLIC_CLARITY_ID}");`}
+        </Script>
+      )}
       <body className={`${inter.variable} antialiased`}>
         {children}
       </body>

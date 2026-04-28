@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePathname, useRouter } from 'next/navigation';
 import { SiteLanguage, LOCALE_TO_LANGUAGE } from '@/lib/language';
+import { trackEvent } from '@/lib/analytics';
 
 function FlagUS({ className }: { className?: string }) {
   return (
@@ -67,6 +68,7 @@ export default function LanguageSwitcher({ current }: { current: SiteLanguage })
 
   function switchLocale(targetLocale: string) {
     setOpen(false);
+    trackEvent({ event: 'language_switch', from_locale: currentLang.locale, to_locale: targetLocale });
     router.push(getLocaleUrl(targetLocale));
   }
 

@@ -2,6 +2,7 @@
 
 import { Download } from 'lucide-react';
 import { useState } from 'react';
+import { trackEvent } from '@/lib/analytics';
 
 interface Props {
   downloadLabel: string;
@@ -12,6 +13,7 @@ export default function WorkResumeDownloadButton({ downloadLabel, sizeLabel }: P
   const [hovered, setHovered] = useState(false);
 
   function handleResumeDownload() {
+    trackEvent({ event: 'resume_download' });
     const link = document.createElement('a');
     link.href = 'resume.pdf';
     link.download = 'Paulo-Silva-Resume.pdf';

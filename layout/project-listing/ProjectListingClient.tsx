@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import type { Translations } from '@/lib/i18n';
 import { tr } from '@/lib/i18n';
+import { trackEvent } from '@/lib/analytics';
 
 type SortOrder = 'newest' | 'oldest' | 'a-z' | 'z-a';
 
@@ -134,6 +135,7 @@ export default function ProjectListingClient({
               href={`/${locale}/projects/${project.slug}`}
               className="group block hero-animate"
               style={{ animationDelay: `${300 + index * 80}ms` }}
+              onClick={() => trackEvent({ event: 'project_click', project_title: project.title, project_slug: project.slug })}
             >
               <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
 

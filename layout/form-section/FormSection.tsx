@@ -6,6 +6,7 @@ import { sendEmail } from '@/app/actions/sendEmail';
 import { useRef, useState } from 'react';
 import AnimateIn from '@/components/animateIn';
 import type { Translations } from '@/lib/i18n';
+import { trackEvent } from '@/lib/analytics';
 
 export default function FormSection({ t }: { t: Translations['form'] }) {
   const formRef = useRef<HTMLFormElement>(null);
@@ -44,7 +45,7 @@ export default function FormSection({ t }: { t: Translations['form'] }) {
             <div className="mt-6 md:mt-12">
               <div className="flex items-center gap-4 text-on-primary">
                 <Mail className="min-w-6 min-h-6" />
-                <Link href="mailto:pjorge.silvaa@gmail.com" className="font-medium text-sm md:text-base hover:underline">
+                <Link href="mailto:pjorge.silvaa@gmail.com" onClick={() => trackEvent({ event: 'email_click' })} className="font-medium text-sm md:text-base hover:underline">
                   pjorge.silvaa@gmail.com
                 </Link>
               </div>
@@ -87,6 +88,7 @@ export default function FormSection({ t }: { t: Translations['form'] }) {
 
                   if (res?.success !== false) {
                     setStatus('success');
+                    trackEvent({ event: 'contact_form_submit' });
 
                     formRef.current?.reset();
 
@@ -99,9 +101,11 @@ export default function FormSection({ t }: { t: Translations['form'] }) {
                     /* setTimeout(() => setStatus('idle'), 5000); */
                   } else {
                     setStatus('error');
+                    trackEvent({ event: 'contact_form_error' });
                   }
                 } catch {
                   setStatus('error');
+                  trackEvent({ event: 'contact_form_error' });
                 }
 
                 setLoading(false);
