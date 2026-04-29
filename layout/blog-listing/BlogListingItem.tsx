@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { trackEvent } from '@/lib/analytics';
+import { LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
 
 export default function BlogListingItem({
   post,
@@ -64,7 +65,7 @@ export default function BlogListingItem({
             <div>
               <p className="text-primary text-sm font-bold">{post.author.name}</p>
               <p className="text-secondary text-xs">
-                {Intl.DateTimeFormat(locale === 'pt' ? 'pt-PT' : 'en-US', { month: 'short', day: '2-digit', year: 'numeric' }).format(post.publishedAt)}
+                {Intl.DateTimeFormat(LOCALE_TO_LANG_ATTR[locale as Locale] ?? 'en-US', { month: 'short', day: '2-digit', year: 'numeric' }).format(new Date(post.publishedAt))}
                 {post.readingTimeMinutes > 0 && ` · ${minReadLabel.replace('{count}', String(post.readingTimeMinutes))}`}
               </p>
             </div>

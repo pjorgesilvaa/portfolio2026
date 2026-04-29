@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { LOCALE_TO_HREFLANG } from '@/lib/language';
+import { LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://paulosilva.com';
 
@@ -46,12 +46,12 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound();
 
-  const dateLocale = locale === 'pt' ? 'pt-PT' : 'en-US';
+  const dateLocale = LOCALE_TO_LANG_ATTR[locale as Locale] ?? 'en-US';
   const formattedDate = Intl.DateTimeFormat(dateLocale, {
     month: 'long',
     day: '2-digit',
     year: 'numeric',
-  }).format(post.publishedAt);
+  }).format(new Date(post.publishedAt));
 
   return (
     <div className="px-8 py-12 md:py-20">

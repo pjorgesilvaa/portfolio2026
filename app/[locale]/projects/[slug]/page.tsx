@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { LOCALE_TO_HREFLANG } from '@/lib/language';
+import { LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
 import ProjectExternalLinks from '@/components/projectExternalLinks';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://paulosilva.com';
@@ -41,12 +41,12 @@ export default async function ProjectPage({ params }: Props) {
 
   if (!project) notFound();
 
-  const dateLocale = locale === 'pt' ? 'pt-PT' : 'en-US';
+  const dateLocale = LOCALE_TO_LANG_ATTR[locale as Locale] ?? 'en-US';
   const formattedDate = Intl.DateTimeFormat(dateLocale, {
     month: 'long',
     day: '2-digit',
     year: 'numeric',
-  }).format(project.createdAt);
+  }).format(new Date(project.createdAt));
 
   return (
     <div className="px-8 py-12 md:py-20">
