@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
+import { LOCALES, LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://paulosilva.com';
 
@@ -30,11 +30,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: post.isIndexed && post.status === 'published' ? 'index, follow' : 'noindex, nofollow',
     alternates: {
       canonical: `${BASE_URL}/${locale}/blog/${slug}`,
-      languages: {
-        [LOCALE_TO_HREFLANG[locale as keyof typeof LOCALE_TO_HREFLANG] ?? 'en-US']:
-          `${BASE_URL}/${locale}/blog/${slug}`,
-        'x-default': `${BASE_URL}/en/blog`,
-      },
+      languages: Object.fromEntries([
+        ...LOCALES.map(l => [LOCALE_TO_HREFLANG[l], `${BASE_URL}/${l}/blog/${slug}`]),
+        ['x-default', `${BASE_URL}/en/blog/${slug}`],
+      ]),
     },
   };
 }
@@ -53,8 +52,31 @@ export default async function BlogPostPage({ params }: Props) {
     year: 'numeric',
   }).format(new Date(post.publishedAt));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.ogImageUrl || post.coverImageUrl || undefined,
+    datePublished: new Date(post.publishedAt).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: post.author.name,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Paulo Silva',
+      url: BASE_URL,
+    },
+    url: `${BASE_URL}/${locale}/blog/${slug}`,
+  };
+
   return (
     <div className="px-8 py-12 md:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="w-full max-w-3xl mx-auto">
         {/* BACK */}
         <Link

@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
+import { LOCALES, LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
 import ProjectExternalLinks from '@/components/projectExternalLinks';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://paulosilva.com';
@@ -23,13 +23,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: project.title,
     description: project.excerpt,
+    openGraph: {
+      title: project.title,
+      description: project.excerpt,
+      images: project.bannerUrl ? [{ url: project.bannerUrl, width: 1200, height: 630, alt: project.title }] : [],
+    },
     alternates: {
       canonical: `${BASE_URL}/${locale}/projects/${slug}`,
-      languages: {
-        [LOCALE_TO_HREFLANG[locale as keyof typeof LOCALE_TO_HREFLANG] ?? 'en-US']:
-          `${BASE_URL}/${locale}/projects/${slug}`,
-        'x-default': `${BASE_URL}/en/projects`,
-      },
+      languages: Object.fromEntries([
+        ...LOCALES.map(l => [LOCALE_TO_HREFLANG[l], `${BASE_URL}/${l}/projects/${slug}`]),
+        ['x-default', `${BASE_URL}/en/projects/${slug}`],
+      ]),
     },
   };
 }
@@ -48,8 +52,29 @@ export default async function ProjectPage({ params }: Props) {
     year: 'numeric',
   }).format(new Date(project.createdAt));
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareSourceCode',
+    name: project.title,
+    description: project.excerpt,
+    image: project.bannerUrl || undefined,
+    dateCreated: new Date(project.createdAt).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: 'Paulo Silva',
+      url: BASE_URL,
+    },
+    url: `${BASE_URL}/${locale}/projects/${slug}`,
+    codeRepository: project.projectGitUrl || undefined,
+    runtimePlatform: project.tags?.join(', ') || undefined,
+  };
+
   return (
     <div className="px-8 py-12 md:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="w-full max-w-3xl mx-auto">
         {/* BACK */}
         <Link

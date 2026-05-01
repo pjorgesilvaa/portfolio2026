@@ -12,14 +12,10 @@ export default async function HeroSection() {
           <h2 className="text-primary font-semibold uppercase hero-animate" style={{ animationDelay: '0ms' }}>
             {t.hero.role}
           </h2>
-          <h1 className="text-[#2B3437] text-4xl md:text-7xl font-bold hero-animate" style={{ animationDelay: '100ms' }}>
-            {t.hero.line1}
-          </h1>
-          <h1 className="text-primary text-4xl md:text-7xl font-bold break-all hero-animate" style={{ animationDelay: '200ms' }}>
-            {t.hero.line2}
-          </h1>
-          <h1 className="text-[#2B3437] text-4xl md:text-7xl font-bold hero-animate" style={{ animationDelay: '300ms' }}>
-            {t.hero.line3}
+          <h1 className="text-4xl md:text-7xl font-bold flex flex-col">
+            <span className="text-[#2B3437] hero-animate" style={{ animationDelay: '100ms' }}>{t.hero.line1}</span>
+            <span className="text-primary break-all hero-animate" style={{ animationDelay: '200ms' }}>{t.hero.line2}</span>
+            <span className="text-[#2B3437] hero-animate" style={{ animationDelay: '300ms' }}>{t.hero.line3}</span>
           </h1>
           <p className="text-secondary text-sm md:text-base mt-4 hero-animate" style={{ animationDelay: '420ms' }}>
             {t.hero.description}
@@ -41,7 +37,7 @@ export default async function HeroSection() {
         </div>
         <div className="hero-fade-in w-full aspect-3/4 md:w-112.5 md:h-150" style={{ animationDelay: '200ms' }}>
           <div className="relative w-full h-full float-animate" style={{ animationDelay: '1s' }}>
-            <Image src="/images/hero-image.png" alt="Hero Image" fill className="object-cover rounded-md" />
+            <Image src="/images/hero-image.png" alt="Paulo Silva — Senior Full Stack Engineer" fill className="object-cover rounded-md" />
           </div>
         </div>
       </div>
