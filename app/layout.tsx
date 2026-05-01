@@ -4,6 +4,7 @@ import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { headers } from 'next/headers';
 import { LOCALE_TO_LANG_ATTR } from '@/lib/language';
 import Script from 'next/script';
+import ClarityIdentify from '@/components/clarityIdentify';
 import './globals.css';
 
 const inter = Inter({
@@ -42,6 +43,7 @@ export default async function RootLayout({
         </Script>
       )}
       <body className={`${inter.variable} antialiased`}>
+        {process.env.NEXT_PUBLIC_CLARITY_ID && <ClarityIdentify />}
         {children}
       </body>
     </html>
