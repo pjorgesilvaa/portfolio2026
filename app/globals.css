@@ -189,9 +189,10 @@
   font-style: italic;
 }
 .blog-content pre {
-  background: #0f131f;
-  color: #e2e8f0;
-  padding: 1.25rem;
+  position: relative;
+  background: #282c34;
+  color: #abb2bf;
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
   border-radius: 0.75rem;
   overflow-x: auto;
   margin-bottom: 1.25rem;
@@ -205,10 +206,57 @@
   border-radius: 0.3rem;
   font-size: 0.9em;
 }
-.blog-content pre code {
+/* hljs sets its own background on code.hljs — keep pre background, drop the inner one */
+.blog-content pre code,
+.blog-content pre code.hljs {
   background: transparent;
   color: inherit;
   padding: 0;
+}
+/* Language badge — top left */
+.code-lang-badge {
+  position: absolute;
+  top: 0.65rem;
+  left: 1rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5c6370;
+  pointer-events: none;
+  line-height: 1.75rem;
+}
+/* Push code down when badge is present */
+.blog-content pre[data-enhanced] code {
+  display: block;
+  padding-top: 1.5rem;
+}
+/* Copy button — top right */
+.code-copy-btn {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.375rem;
+  color: #5c6370;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  padding: 0;
+}
+.code-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #abb2bf;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.code-copy-btn.copied {
+  color: #98c379;
+  border-color: rgba(152, 195, 121, 0.3);
 }
 .blog-content img {
   border-radius: 0.75rem;

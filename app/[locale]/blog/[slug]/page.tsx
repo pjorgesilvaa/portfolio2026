@@ -9,6 +9,7 @@ import { LOCALES, LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/
 import ShareButtons from '@/components/ShareButtons';
 import RelatedPosts from '@/components/RelatedPosts';
 import ReadingProgress from '@/components/ReadingProgress';
+import BlogCodeBlocks from '@/components/BlogCodeBlocks';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://psilvaa.com';
 
@@ -126,6 +127,7 @@ export default async function BlogPostPage({ params }: Props) {
           style={{ animationDelay: '320ms' }}
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
+        <BlogCodeBlocks />
 
         {/* AUTHOR + META */}
         <div className="hero-animate flex items-center gap-4 mt-12 pt-8 border-t border-gray-200" style={{ animationDelay: '400ms' }}>
