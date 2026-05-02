@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import { LOCALES, LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
 import ProjectExternalLinks from '@/components/projectExternalLinks';
+import ShareButtons from '@/components/ShareButtons';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://paulosilva.com';
 
@@ -76,17 +77,24 @@ export default async function ProjectPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="w-full max-w-3xl mx-auto">
-        {/* BACK */}
-        <Link
-          href={`/${locale}/projects`}
-          className="hero-animate inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-70 transition-opacity duration-200 mb-8"
-          style={{ animationDelay: '0ms' }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          {t.projectPost.backToProjects}
-        </Link>
+        {/* BACK + SHARE */}
+        <div className="hero-animate flex items-center justify-between mb-8" style={{ animationDelay: '0ms' }}>
+          <Link
+            href={`/${locale}/projects`}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-70 transition-opacity duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            {t.projectPost.backToProjects}
+          </Link>
+          <ShareButtons
+            url={`${BASE_URL}/${locale}/projects/${slug}`}
+            title={project.title}
+            postSlug={slug}
+            label={t.projectPost.share}
+          />
+        </div>
 
         {/* TITLE */}
         <div className="hero-animate" style={{ animationDelay: '80ms' }}>

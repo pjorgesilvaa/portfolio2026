@@ -154,11 +154,18 @@
     "copyright": "© 2026 Paulo Silva. Todos os direitos reservados."
   },
   "blogPost": {
-    "backToJournal": "Voltar ao Jornal"
+    "backToJournal": "Voltar ao Jornal",
+    "share": "Partilhar artigo",
+    "shareOnLinkedIn": "LinkedIn",
+    "shareOnX": "X (Twitter)",
+    "copyLink": "Copiar link",
+    "copied": "Copiado!",
+    "relatedPosts": "Artigos relacionados"
   },
   "projectPost": {
     "backToProjects": "Voltar aos Projetos",
     "viewOnGithub": "Ver no GitHub",
-    "viewLive": "Ver em Produção"
+    "viewLive": "Ver em Produção",
+    "share": "Partilhar projeto"
   }
 }

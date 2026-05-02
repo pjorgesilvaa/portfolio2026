@@ -1,4 +1,4 @@
-import { getArticleBySlug } from '@/lib/supabase/queries/articles';
+import { getArticleBySlug, getRelatedPosts } from '@/lib/supabase/queries/articles';
 import { getLanguage, getLocale } from '@/lib/language.server';
 import { getT } from '@/lib/i18n.server';
 import { notFound } from 'next/navigation';
@@ -6,8 +6,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { LOCALES, LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
+import ShareButtons from '@/components/ShareButtons';
+import RelatedPosts from '@/components/RelatedPosts';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://paulosilva.com';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://psilvaa.com';
 
 interface Props {
   params: Promise<{ locale: string; slug: string }>;
@@ -42,8 +44,8 @@ export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params;
   const [language, t] = await Promise.all([getLanguage(), getT()]);
   const post = await getArticleBySlug(slug, language);
-
   if (!post) notFound();
+  const relatedPosts = await getRelatedPosts(slug, post.category?.id ?? '', language);
 
   const dateLocale = LOCALE_TO_LANG_ATTR[locale as Locale] ?? 'en-US';
   const formattedDate = Intl.DateTimeFormat(dateLocale, {
@@ -78,17 +80,24 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="w-full max-w-3xl mx-auto">
-        {/* BACK */}
-        <Link
-          href={`/${locale}/blog`}
-          className="hero-animate inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-70 transition-opacity duration-200 mb-8"
-          style={{ animationDelay: '0ms' }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          {t.blogPost.backToJournal}
-        </Link>
+        {/* BACK + SHARE */}
+        <div className="hero-animate flex items-center justify-between mb-8" style={{ animationDelay: '0ms' }}>
+          <Link
+            href={`/${locale}/blog`}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:opacity-70 transition-opacity duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            {t.blogPost.backToJournal}
+          </Link>
+          <ShareButtons
+            url={`${BASE_URL}/${locale}/blog/${slug}`}
+            title={post.title}
+            postSlug={slug}
+            label={t.blogPost.share}
+          />
+        </div>
 
         {/* CATEGORY */}
         {post.category?.name && (
@@ -131,6 +140,14 @@ export default async function BlogPostPage({ params }: Props) {
             </p>
           </div>
         </div>
+
+        {/* RELATED POSTS */}
+        <RelatedPosts
+          posts={relatedPosts}
+          locale={locale}
+          heading={t.blogPost.relatedPosts}
+          minReadLabel={t.blogListing.minRead}
+        />
       </div>
     </div>
   );

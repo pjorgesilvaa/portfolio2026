@@ -190,6 +190,27 @@ export const getArticlesWithFilters = unstable_cache(
   { revalidate: BLOG_TTL, tags: ['articles'] },
 );
 
+export const getRelatedPosts = unstable_cache(
+  async (currentSlug: string, categoryId: string, language = 'en-US', limit = 3): Promise<BlogPost[]> => {
+    if (!categoryId) return [];
+    const supabase = createServerSupabaseClient();
+    const { data, error } = await supabase
+      .from('articles')
+      .select(SELECT_FIELDS)
+      .eq('status', 'published')
+      .eq('site_id', process.env.NEXT_PUBLIC_SITE_ID)
+      .eq('language', language)
+      .eq('category_id', categoryId)
+      .neq('slug', currentSlug)
+      .order('published_at', { ascending: false })
+      .limit(limit);
+    if (error) { console.error('[getRelatedPosts] Supabase error:', error.message); return []; }
+    return (data ?? []).map(mapRow);
+  },
+  ['related-posts'],
+  { revalidate: BLOG_TTL, tags: ['articles'] },
+);
+
 export const getArticleBySlug = unstable_cache(
   async (slug: string, language = 'en-US'): Promise<BlogPost | null> => {
     const supabase = createServerSupabaseClient();

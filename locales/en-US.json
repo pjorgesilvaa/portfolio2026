@@ -154,11 +154,18 @@
     "copyright": "© 2026 Paulo Silva. All rights reserved."
   },
   "blogPost": {
-    "backToJournal": "Back to Journal"
+    "backToJournal": "Back to Journal",
+    "share": "Share this article",
+    "shareOnLinkedIn": "LinkedIn",
+    "shareOnX": "X (Twitter)",
+    "copyLink": "Copy link",
+    "copied": "Copied!",
+    "relatedPosts": "Related articles"
   },
   "projectPost": {
     "backToProjects": "Back to Projects",
     "viewOnGithub": "View on GitHub",
-    "viewLive": "View Live"
+    "viewLive": "View Live",
+    "share": "Share project"
   }
 }
