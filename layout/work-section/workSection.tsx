@@ -8,10 +8,10 @@ export default async function WorkSection() {
 
   return (
     <>
-      <div className="w-full md:w-7xl m-auto flex flex-col md:flex-row items-baseline justify-between gap-8 md:gap-16 md:px-8">
-        <AnimateIn className="w-full md:w-6xl" animation="fade-left">
+      <div className="w-full md:w-7xl m-auto flex flex-col lg:flex-row items-baseline justify-between gap-8 lg:gap-16 lg:px-8">
+        <AnimateIn className="w-full lg:w-6xl" animation="fade-left">
           <h2 className="text-primary font-semibold uppercase">{t.work.eyebrow}</h2>
-          <h1 className="text-[#2B3437] text-2xl md:text-4xl font-bold">{t.work.title}</h1>
+          <h2 className="text-[#2B3437] text-2xl md:text-3xl lg:text-4xl font-bold">{t.work.title}</h2>
           <p className="text-secondary text-sm md:text-base mt-4">{t.work.subtitle}</p>
           <WorkResumeDownloadButton downloadLabel={t.work.downloadResume} sizeLabel={t.work.resumeSize} />
         </AnimateIn>

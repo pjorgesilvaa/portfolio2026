@@ -23,7 +23,7 @@ export default async function ProjectSection() {
 
   // Col-span pattern: 2-1-1-2-2-1-1-2...
   const spanClass = (index: number) =>
-    index % 4 === 0 || index % 4 === 3 ? 'md:col-span-2' : 'md:col-span-1';
+    index % 4 === 0 || index % 4 === 3 ? 'lg:col-span-2' : 'lg:col-span-1';
 
   return (
     <div className="w-full md:w-7xl m-auto flex flex-col items-start gap-8 md:gap-16 md:px-8">
@@ -44,7 +44,7 @@ export default async function ProjectSection() {
       </AnimateIn>
 
       {/* GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
         {projects.map((project, index) => {
           const span = `col-span-1 ${spanClass(index)}`;
           const delay = { animationDelay: `${300 + index * 80}ms` };
@@ -52,7 +52,7 @@ export default async function ProjectSection() {
           // Empty slot
           if (!project) {
             return (
-              <div key={`empty-${index}`} className={`hidden md:block ${span} hero-animate`} style={delay}>
+              <div key={`empty-${index}`} className={`hidden lg:block ${span} hero-animate`} style={delay}>
                 <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col h-full">
                   <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
                     <span className="text-gray-400 text-sm">{t.projects.comingSoon}</span>

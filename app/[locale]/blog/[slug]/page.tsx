@@ -8,6 +8,7 @@ import { Metadata } from 'next';
 import { LOCALES, LOCALE_TO_HREFLANG, LOCALE_TO_LANG_ATTR, Locale } from '@/lib/language';
 import ShareButtons from '@/components/ShareButtons';
 import RelatedPosts from '@/components/RelatedPosts';
+import ReadingProgress from '@/components/ReadingProgress';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://psilvaa.com';
 
@@ -75,6 +76,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <div className="px-8 py-12 md:py-20">
+      <ReadingProgress />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -28,7 +28,7 @@ export default async function BlogSection() {
       {posts.length === 0 ? (
         <p className="text-center text-secondary mt-16">{t.blog.empty}</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-8 md:mt-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-16 mt-8 lg:mt-32">
           {posts.map((post, index) => (
             <BlogListingItem post={post} key={post.id} index={index} locale={locale} noImageLabel={t.blogListing.noImage} minReadLabel={t.blogListing.minRead} />
           ))}

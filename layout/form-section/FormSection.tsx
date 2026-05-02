@@ -58,7 +58,7 @@ export default function FormSection({ t }: { t: Translations['form'] }) {
           </AnimateIn>
 
           {/* FORM */}
-          <AnimateIn animation="fade-right" delay={250} className="hidden md:block">
+          <AnimateIn animation="fade-right" delay={250}>
           <div className="bg-white p-4 md:p-10 rounded-xl relative overflow-hidden">
             {/* SUCCESS OVERLAY */}
             {status === 'success' && (
