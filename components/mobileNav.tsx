@@ -11,7 +11,6 @@ const NAV_KEYS: { key: keyof Translations['nav']; anchor: string }[] = [
   { key: 'projects', anchor: '#projects' },
   { key: 'work',     anchor: '#work' },
   { key: 'feedback', anchor: '#feedback' },
-  { key: 'journal',  anchor: '#journal' },
 ];
 
 export default function MobileNav({

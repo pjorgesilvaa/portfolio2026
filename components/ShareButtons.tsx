@@ -1,7 +1,5 @@
 'use client';
 
-import { trackEvent } from '@/lib/analytics';
-
 interface Props {
   url: string;
   title: string;
@@ -9,21 +7,18 @@ interface Props {
   label: string;
 }
 
-export default function ShareButtons({ url, title, postSlug, label }: Props) {
+export default function ShareButtons({ url, title, label }: Props) {
   async function handleShare() {
     if (typeof navigator === 'undefined') return;
 
     if (navigator.share) {
       try {
         await navigator.share({ title, url });
-        trackEvent({ event: 'blog_post_share', post_title: title, post_slug: postSlug, channel: 'native' });
       } catch {
-        // User dismissed the sheet — not an error
+        // User dismissed the sheet
       }
     } else {
-      // Fallback: copy to clipboard for browsers without Web Share API
       await navigator.clipboard.writeText(url);
-      trackEvent({ event: 'blog_post_share', post_title: title, post_slug: postSlug, channel: 'copy_link' });
     }
   }
 

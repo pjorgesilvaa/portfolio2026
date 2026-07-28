@@ -3,7 +3,6 @@
     "projects": "Projects",
     "work": "Work",
     "feedback": "Feedback",
-    "journal": "Journal",
     "getInTouch": "Get In Touch"
   },
   "hero": {
@@ -86,33 +85,6 @@
     "noImage": "No cover image",
     "categoryAll": "All"
   },
-  "blog": {
-    "eyebrow": "Insights & Perspectives",
-    "title": "The Curated Journal",
-    "subtitle": "Explore my latest thoughts and insights on design, technology, and business.",
-    "viewAll": "View all posts →",
-    "empty": "No articles published yet. Check back soon."
-  },
-  "blogListing": {
-    "eyebrow": "Insights & Perspectives",
-    "title": "The Curated Journal",
-    "countSingular": "{count} article published",
-    "countPlural": "{count} articles published",
-    "searchPlaceholder": "Search articles...",
-    "sortNewest": "Newest first",
-    "sortOldest": "Oldest first",
-    "sortShortest": "Shortest read",
-    "sortLongest": "Longest read",
-    "resultsSingular": "{count} result found",
-    "resultsPlural": "{count} results found",
-    "empty": "No articles found",
-    "emptyHint": "Try adjusting your search or filters.",
-    "prev": "← Prev",
-    "next": "Next →",
-    "noImage": "No cover image",
-    "minRead": "{count} min read",
-    "categoryAll": "All"
-  },
   "feedback": {
     "eyebrow": "Feedback",
     "title": "Voices of Trust",
@@ -152,15 +124,6 @@
   },
   "footer": {
     "copyright": "© 2026 Paulo Silva. All rights reserved."
-  },
-  "blogPost": {
-    "backToJournal": "Back to Journal",
-    "share": "Share this article",
-    "shareOnLinkedIn": "LinkedIn",
-    "shareOnX": "X (Twitter)",
-    "copyLink": "Copy link",
-    "copied": "Copied!",
-    "relatedPosts": "Related articles"
   },
   "projectPost": {
     "backToProjects": "Back to Projects",

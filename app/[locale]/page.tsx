@@ -1,4 +1,3 @@
-import BlogSection from '@/layout/blog-section/BlogSection';
 import FeedbackSection from '@/layout/feedback-section/FeedbackSection';
 import FooterSection from '@/layout/footer-section/FooterSection';
 import FormSection from '@/layout/form-section/FormSection';
@@ -53,9 +52,6 @@ export default async function Home() {
         </section>
         <section aria-label="Contact" className="md:min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="form">
           <FormSection t={t.form} />
-        </section>
-        <section aria-label="Journal" className="bg-[#EFF4F7] min-h-screen px-8 py-8 drop-shadow-xs flex items-center justify-center" id="journal">
-          <BlogSection />
         </section>
       </main>
       <footer className="px-8 py-8 drop-shadow-xs flex items-center justify-center">

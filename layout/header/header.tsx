@@ -30,9 +30,6 @@ export default async function Header() {
           <Link href={`${home}#feedback`} className="text-secondary text-lg font-bold mx-4 hover:text-primary transition-colors duration-300">
             {t.nav.feedback}
           </Link>
-          <Link href={`${home}#journal`} className="text-secondary text-lg font-bold mx-4 hover:text-primary transition-colors duration-300">
-            {t.nav.journal}
-          </Link>
         </nav>
 
         {/* DESKTOP RIGHT */}

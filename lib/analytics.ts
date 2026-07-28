@@ -3,8 +3,6 @@ type AnalyticsEvent =
   | { event: 'contact_form_error' }
   | { event: 'resume_download' }
   | { event: 'language_switch'; from_locale: string; to_locale: string }
-  | { event: 'blog_post_click'; post_title: string; post_slug: string }
-  | { event: 'blog_post_share'; post_title: string; post_slug: string; channel: string }
   | { event: 'project_click'; project_title: string; project_slug: string }
   | { event: 'project_github_click'; project_title: string; project_slug: string }
   | { event: 'project_live_click'; project_title: string; project_slug: string }

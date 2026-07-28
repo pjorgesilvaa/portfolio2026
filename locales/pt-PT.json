@@ -3,7 +3,6 @@
     "projects": "Projetos",
     "work": "Experiência",
     "feedback": "Feedback",
-    "journal": "Jornal",
     "getInTouch": "Contacto"
   },
   "hero": {
@@ -86,33 +85,6 @@
     "noImage": "Sem imagem de capa",
     "categoryAll": "Todos"
   },
-  "blog": {
-    "eyebrow": "Perspetivas & Reflexões",
-    "title": "O Jornal Curado",
-    "subtitle": "Explore os meus últimos pensamentos e perspetivas sobre design, tecnologia e negócio.",
-    "viewAll": "Ver todos os artigos →",
-    "empty": "Ainda não há artigos publicados. Volte em breve."
-  },
-  "blogListing": {
-    "eyebrow": "Perspetivas & Reflexões",
-    "title": "O Jornal Curado",
-    "countSingular": "{count} artigo publicado",
-    "countPlural": "{count} artigos publicados",
-    "searchPlaceholder": "Pesquisar artigos...",
-    "sortNewest": "Mais recentes",
-    "sortOldest": "Mais antigos",
-    "sortShortest": "Leitura mais curta",
-    "sortLongest": "Leitura mais longa",
-    "resultsSingular": "{count} resultado encontrado",
-    "resultsPlural": "{count} resultados encontrados",
-    "empty": "Nenhum artigo encontrado",
-    "emptyHint": "Tente ajustar a sua pesquisa ou filtros.",
-    "prev": "← Anterior",
-    "next": "Seguinte →",
-    "noImage": "Sem imagem de capa",
-    "minRead": "{count} min de leitura",
-    "categoryAll": "Todas"
-  },
   "feedback": {
     "eyebrow": "Feedback",
     "title": "Vozes de Confiança",
@@ -152,15 +124,6 @@
   },
   "footer": {
     "copyright": "© 2026 Paulo Silva. Todos os direitos reservados."
-  },
-  "blogPost": {
-    "backToJournal": "Voltar ao Jornal",
-    "share": "Partilhar artigo",
-    "shareOnLinkedIn": "LinkedIn",
-    "shareOnX": "X (Twitter)",
-    "copyLink": "Copiar link",
-    "copied": "Copiado!",
-    "relatedPosts": "Artigos relacionados"
   },
   "projectPost": {
     "backToProjects": "Voltar aos Projetos",
